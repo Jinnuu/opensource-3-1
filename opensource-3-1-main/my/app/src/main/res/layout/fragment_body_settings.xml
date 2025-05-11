@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:ignore="ExtraText">
+
+    <TextView
+        android:id="@+id/title"
+        android:text="집중하려는 부위를 선택하세요"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:layout_marginBottom="24dp">
+
+        <Button android:id="@+id/btn_back" android:text="등" />
+        <Button android:id="@+id/btn_shoulder" android:text="어깨" />
+        <Button android:id="@+id/btn_arm" android:text="팔" />
+        <Button android:id="@+id/btn_chest" android:text="가슴" />
+        <Button android:id="@+id/btn_abs" android:text="복근" />
+        <Button android:id="@+id/btn_hip" android:text="엉덩이" />
+        <Button android:id="@+id/btn_leg" android:text="다리" />
+        <Button android:id="@+id/btn_full" android:text="전신" />
+    </GridLayout>
+
+    <ImageView
+        android:id="@+id/body"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:src="@drawable/body" />
+
+    <Button
+        android:id="@+id/btn_next"
+        android:text="다음"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#304FFE"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"/>
+
+</LinearLayout>
