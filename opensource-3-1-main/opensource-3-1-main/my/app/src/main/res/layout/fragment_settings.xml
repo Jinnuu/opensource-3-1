@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:padding="16dp"
+    tools:context="SettingsFragment">
+
+    <!-- 제목 -->
+    <TextView
+        android:id="@+id/tvSettingsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings_title"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp" />
+
+    <!-- 나의 프로필 버튼 (재활 부위 선택) -->
+
+    <Button
+        android:id="@+id/btnMyProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSettingsTitle"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="#3f51b5"
+        android:drawableLeft="@android:drawable/ic_menu_myplaces"
+        android:drawablePadding="10dp"
+        android:padding="12dp"
+        android:text="나의 프로필 - 재활 부위 선택"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/btnAppGuide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="어플 사용 가이드"
+        android:textColor="#222222"
+        android:background="#B2DFDB"
+        android:layout_below="@id/btnMyProfile"
+        android:layout_marginBottom="24dp"
+        android:padding="12dp"
+        android:drawableLeft="@android:drawable/ic_menu_help"
+        android:drawablePadding="10dp" />
+
+    <!-- 구분선 -->
+    <View
+        android:id="@+id/viewDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#cccccc"
+        android:layout_below="@id/btnAppGuide"
+        android:layout_marginBottom="32dp" />
+
+    <!-- 안내 문구 -->
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="앱 설정을 통해 개인 맞춤형 재활 서비스를 이용하세요."
+        android:textColor="#666666"
+        android:textSize="16sp"
+        android:layout_below="@id/viewDivider"
+        android:layout_marginBottom="24dp"
+        android:layout_centerHorizontal="true" />
+
+    <!-- 알림 설정 스위치 -->
+    <LinearLayout
+        android:id="@+id/layoutNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/tvInfo"
+        android:gravity="center_vertical"
+        android:padding="16dp"
+        android:background="#e0e0e0"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="알림 설정"
+            android:textSize="16sp"
+            android:textColor="#333333" />
+
+        <Switch
+            android:id="@+id/switchNotification"
+            android:layout_width="59dp"
+            android:layout_height="38dp" />
+    </LinearLayout>
+
+</RelativeLayout>
