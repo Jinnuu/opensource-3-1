@@ -67,19 +67,36 @@ public class ExerciseFragment extends Fragment {
     }
 
     private void setupClickListeners() {
-        cardWristExercise.setOnClickListener(v -> showTimePickerDialog(WristExerciseActivity.class));
-        cardBackExercise.setOnClickListener(v -> showTimePickerDialog(BackExerciseActivity.class));
-        cardNeckExercise.setOnClickListener(v -> showTimePickerDialog(NeckExerciseActivity.class));
-        cardCustomExercise.setOnClickListener(v -> showTimePickerDialog(CustomExerciseActivity.class));
+        cardWristExercise.setOnClickListener(v -> showExerciseGuide(
+            "손목 운동", 
+            "손목 통증 완화를 위한 운동",
+            "m6nnpHeH86E"  // 손목 운동 영상 ID
+        ));
+        
+        cardBackExercise.setOnClickListener(v -> showExerciseGuide(
+            "허리 운동", 
+            "허리 건강을 위한 스트레칭",
+            "m6nnpHeH86E"  // 허리 운동 영상 ID
+        ));
+        
+        cardNeckExercise.setOnClickListener(v -> showExerciseGuide(
+            "목 운동", 
+            "목 통증 완화를 위한 스트레칭",
+            "m6nnpHeH86E"  // 목 운동 영상 ID
+        ));
+        
+        cardCustomExercise.setOnClickListener(v -> showExerciseGuide(
+            "커스텀 운동", 
+            "나만의 맞춤 운동",
+            "m6nnpHeH86E"  // 커스텀 운동 영상 ID
+        ));
     }
 
-    private void showTimePickerDialog(Class<?> activityClass) {
-        com.example.my.TimePickerDialog dialog = new com.example.my.TimePickerDialog(getActivity(), (minutes, seconds) -> {
-            Intent intent = new Intent(getActivity(), activityClass);
-            intent.putExtra("minutes", minutes);
-            intent.putExtra("seconds", seconds);
-            startActivity(intent);
-        });
-        dialog.show();
+    private void showExerciseGuide(String exerciseType, String description, String videoId) {
+        exercise_guide guide = exercise_guide.newInstance(exerciseType, description, videoId);
+        getParentFragmentManager().beginTransaction()
+            .replace(R.id.fragment_container, guide)
+            .addToBackStack(null)
+            .commit();
     }
 } 

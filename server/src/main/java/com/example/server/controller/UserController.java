@@ -41,6 +41,26 @@ public class UserController {
         return ResponseEntity.ok("로그인 성공");
     }
 
+    @PostMapping("/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody Map<String, String> request) {
+        String userName = request.get("userName");
+        String currentPassword = request.get("currentPassword");
+        String newPassword = request.get("newPassword");
+
+        User user = userRepository.findByName(userName);
+        if (user == null) {
+            return ResponseEntity.badRequest().body("존재하지 않는 사용자입니다.");
+        }
+
+        if (!user.getPassword().equals(currentPassword)) {
+            return ResponseEntity.badRequest().body("현재 비밀번호가 일치하지 않습니다.");
+        }
+
+        user.setPassword(newPassword);
+        userRepository.save(user);
+        return ResponseEntity.ok("비밀번호가 변경되었습니다.");
+    }
+
     @GetMapping("/registration-date")
     public ResponseEntity<?> getRegistrationDate(@RequestParam String userName) {
         User user = userRepository.findByName(userName);

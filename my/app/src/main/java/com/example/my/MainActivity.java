@@ -7,12 +7,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BottomNavigationView bottomNavigation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnItemSelectedListener(item -> {
             Fragment selectedFragment = null;
             int itemId = item.getItemId();
@@ -36,11 +38,31 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        // 기본 Fragment 설정
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new ExerciseFragment())
-                    .commit();
+        // Intent로 전달된 fragment 파라미터 처리
+        String fragmentName = getIntent().getStringExtra("fragment");
+        if (fragmentName != null) {
+            Fragment selectedFragment = null;
+            if ("custom".equals(fragmentName)) {
+                selectedFragment = new CustomFragment();
+                bottomNavigation.setSelectedItemId(R.id.navigation_custom);
+            }
+            
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
+            }
+        } else {
+            // 기본 Fragment 설정
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, new ExerciseFragment())
+                        .commit();
+            }
         }
+    }
+
+    public void selectCustomTab() {
+        bottomNavigation.setSelectedItemId(R.id.navigation_custom);
     }
 }

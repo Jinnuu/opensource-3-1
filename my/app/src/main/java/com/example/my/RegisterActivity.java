@@ -2,6 +2,7 @@ package com.example.my;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,12 +12,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 import okhttp3.*;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity {
     private EditText etName, etPassword;
     private Button btnRegister, btnGoToLogin;
     private TextView tvMessage;
-    private final OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
+        .build();
     private final Gson gson = new Gson();
 
     @Override
@@ -51,16 +57,21 @@ public class RegisterActivity extends AppCompatActivity {
         user.setPassword(password);
 
         String json = gson.toJson(user);
+        String requestUrl = Constants.API_USERS + "/register";
+        Log.d("RegisterActivity", "Attempting to register at URL: " + requestUrl);
+        Log.d("RegisterActivity", "Request body: " + json);
+
         RequestBody body = RequestBody.create(json, MediaType.parse("application/json"));
 
         Request request = new Request.Builder()
-                .url(Constants.API_USERS + "/register")
+                .url(requestUrl)
                 .post(body)
                 .build();
 
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                Log.e("RegisterActivity", "Register request failed", e);
                 runOnUiThread(() -> {
                     tvMessage.setText("서버 연결 실패: " + e.getMessage());
                 });
@@ -68,7 +79,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
+                Log.d("RegisterActivity", "Register response code: " + response.code());
                 String responseBody = response.body().string();
+                Log.d("RegisterActivity", "Register response body: " + responseBody);
+                
                 runOnUiThread(() -> {
                     if (response.isSuccessful()) {
                         tvMessage.setText("회원가입이 완료되었습니다.");

@@ -32,25 +32,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ReportActivity"
+            android:name=".ExerciseActivity"
             android:exported="true">
         </activity>
         <activity
-            android:name=".WristExerciseActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".BackExerciseActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".NeckExerciseActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".CustomExerciseActivity"
-            android:exported="true">
-        </activity>
+            android:name=".RoutineManagementActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

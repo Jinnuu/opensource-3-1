@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="목 통증 예방을 위한 운동"
+                        android:text="목 통증 완화를 위한 스트레칭"
                         android:textColor="#666666"/>
                 </LinearLayout>
             </LinearLayout>

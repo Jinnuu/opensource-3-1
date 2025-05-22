@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import org.json.JSONObject;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
@@ -22,7 +23,11 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin;
     private TextView tvRegister;
     private CheckBox cbKeepLoggedIn;
-    private final OkHttpClient client = new OkHttpClient();
+    private final OkHttpClient client = new OkHttpClient.Builder()
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
+        .build();
     private final Gson gson = new Gson();
     private static final String PREF_NAME = "LoginPrefs";
     private static final String KEY_USER_NAME = "user_name";
@@ -76,17 +81,22 @@ public class LoginActivity extends AppCompatActivity {
             jsonObject.put("name", name);
             jsonObject.put("password", password);
 
+            String requestUrl = Constants.API_USERS + "/login";
+            Log.d(TAG, "Attempting to login at URL: " + requestUrl);
+            Log.d(TAG, "Request body: " + jsonObject.toString());
+
             RequestBody body = RequestBody.create(
                 MediaType.parse("application/json"), jsonObject.toString());
 
             Request request = new Request.Builder()
-                .url(Constants.API_USERS + "/login")
+                .url(requestUrl)
                 .post(body)
                 .build();
 
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
+                    Log.e(TAG, "Login request failed", e);
                     runOnUiThread(() -> {
                         Toast.makeText(LoginActivity.this, 
                             "로그인 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -95,6 +105,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
+                    Log.d(TAG, "Login response code: " + response.code());
+                    String responseBody = response.body().string();
+                    Log.d(TAG, "Login response body: " + responseBody);
+                    
                     if (response.isSuccessful()) {
                         SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();

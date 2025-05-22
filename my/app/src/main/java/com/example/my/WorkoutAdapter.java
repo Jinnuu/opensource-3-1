@@ -37,13 +37,24 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         Workout workout = workouts.get(position);
         
         // 운동 종류 한글화
-        String type = switch (workout.getType()) {
-            case "wrist" -> "손목 운동";
-            case "back" -> "등 운동";
-            case "neck" -> "목 운동";
-            case "custom" -> "커스텀 운동";
-            default -> workout.getType();
-        };
+        String type;
+        switch (workout.getType()) {
+            case "WRIST":
+                type = "손목 운동";
+                break;
+            case "BACK":
+                type = "허리 운동";
+                break;
+            case "NECK":
+                type = "목 운동";
+                break;
+            case "CUSTOM":
+                type = "커스텀 운동";
+                break;
+            default:
+                type = "기타";
+                break;
+        }
         
         holder.tvWorkoutType.setText(type);
         holder.tvWorkoutDuration.setText(formatDuration(workout.getDuration()));
@@ -61,10 +72,10 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
         return String.format("%02d:%02d", minutes, remainingSeconds);
     }
 
-    static class WorkoutViewHolder extends RecyclerView.ViewHolder {
+    public static class WorkoutViewHolder extends RecyclerView.ViewHolder {
         TextView tvWorkoutType, tvWorkoutDuration, tvWorkoutDate;
 
-        WorkoutViewHolder(View itemView) {
+        public WorkoutViewHolder(@NonNull View itemView) {
             super(itemView);
             tvWorkoutType = itemView.findViewById(R.id.tvWorkoutType);
             tvWorkoutDuration = itemView.findViewById(R.id.tvWorkoutDuration);

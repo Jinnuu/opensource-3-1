@@ -1,5 +1,6 @@
 package com.example.my;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,30 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomFragment extends Fragment {
     private EditText etRoutineName, etRoutineDescription;
     private ChipGroup chipGroupExercises;
-    private Button btnSaveRoutine;
-    private RecyclerView recyclerViewRoutines;
-    private RoutineAdapter adapter;
+    private Button btnSaveRoutine, btnViewSavedRoutines;
+    private TextView tvExerciseDescription;
     private final OkHttpClient client = new OkHttpClient();
     private final Gson gson = new Gson();
     private static final String PREF_NAME = "LoginPrefs";
     private static final String KEY_USER_NAME = "user_name";
+    private final Map<String, String> exerciseDescriptions = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,21 +42,48 @@ public class CustomFragment extends Fragment {
         etRoutineDescription = view.findViewById(R.id.etRoutineDescription);
         chipGroupExercises = view.findViewById(R.id.chipGroupExercises);
         btnSaveRoutine = view.findViewById(R.id.btnSaveRoutine);
-        recyclerViewRoutines = view.findViewById(R.id.recyclerViewRoutines);
+        btnViewSavedRoutines = view.findViewById(R.id.btnViewSavedRoutines);
+        tvExerciseDescription = view.findViewById(R.id.tvExerciseDescription);
+
+        // 운동 설명 초기화
+        initializeExerciseDescriptions();
 
         // 운동 종류 칩 추가
         addExerciseChips();
 
-        // RecyclerView 설정
-        setupRecyclerView();
-
         // 저장 버튼 클릭 리스너
         btnSaveRoutine.setOnClickListener(v -> saveRoutine());
 
-        // 저장된 루틴 로드
-        loadRoutines();
+        // 저장된 루틴 보기 버튼 클릭 리스너
+        btnViewSavedRoutines.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), RoutineManagementActivity.class);
+            startActivity(intent);
+        });
 
         return view;
+    }
+
+    private void initializeExerciseDescriptions() {
+        exerciseDescriptions.put("손목 운동", 
+            "손목 관절의 유연성과 근력을 강화하는 운동입니다.\n\n" +
+            "1. 손목 스트레칭\n" +
+            "2. 손목 회전 운동\n" +
+            "3. 손가락 굴곡/신전 운동\n\n" +
+            "주의사항: 통증이 있을 경우 즉시 중단하세요.");
+        
+        exerciseDescriptions.put("등 운동", 
+            "등 근육을 강화하고 자세를 개선하는 운동입니다.\n\n" +
+            "1. 등 스트레칭\n" +
+            "2. 어깨 으쓱하기\n" +
+            "3. 등 근력 강화 운동\n\n" +
+            "주의사항: 허리를 보호하기 위해 올바른 자세를 유지하세요.");
+        
+        exerciseDescriptions.put("목 운동", 
+            "목 근육을 이완하고 긴장을 풀어주는 운동입니다.\n\n" +
+            "1. 목 스트레칭\n" +
+            "2. 목 회전 운동\n" +
+            "3. 어깨 으쓱하기\n\n" +
+            "주의사항: 갑작스러운 움직임을 피하고 천천히 진행하세요.");
     }
 
     private void addExerciseChips() {
@@ -65,14 +92,30 @@ public class CustomFragment extends Fragment {
             Chip chip = new Chip(requireContext());
             chip.setText(exercise);
             chip.setCheckable(true);
+            
+            // 칩 클릭 리스너 추가
+            chip.setOnClickListener(v -> {
+                if (chip.isChecked()) {
+                    showExerciseDescription(exercise);
+                } else {
+                    hideExerciseDescription();
+                }
+            });
+            
             chipGroupExercises.addView(chip);
         }
     }
 
-    private void setupRecyclerView() {
-        adapter = new RoutineAdapter(new ArrayList<>(), this::deleteRoutine);
-        recyclerViewRoutines.setLayoutManager(new LinearLayoutManager(requireContext()));
-        recyclerViewRoutines.setAdapter(adapter);
+    private void showExerciseDescription(String exercise) {
+        String description = exerciseDescriptions.get(exercise);
+        if (description != null) {
+            tvExerciseDescription.setText(description);
+            tvExerciseDescription.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hideExerciseDescription() {
+        tvExerciseDescription.setVisibility(View.GONE);
     }
 
     private void saveRoutine() {
@@ -134,7 +177,6 @@ public class CustomFragment extends Fragment {
                             Toast.makeText(requireContext(), 
                                 "운동 루틴이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                             clearInputs();
-                            loadRoutines();
                         } else {
                             try {
                                 ResponseBody responseBody = response.body();
@@ -155,102 +197,6 @@ public class CustomFragment extends Fragment {
         });
     }
 
-    private void loadRoutines() {
-        SharedPreferences prefs = requireActivity().getSharedPreferences(PREF_NAME, 0);
-        String userName = prefs.getString(KEY_USER_NAME, null);
-
-        if (userName == null) {
-            Toast.makeText(requireContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Request request = new Request.Builder()
-            .url(Constants.API_ROUTINES + "?userName=" + userName)
-            .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), 
-                            "운동 루틴 로드 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-                }
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (getActivity() != null) {
-                    String responseBody = response.body().string();
-                    getActivity().runOnUiThread(() -> {
-                        if (response.isSuccessful()) {
-                            Type listType = new TypeToken<List<ExerciseRoutine>>(){}.getType();
-                            List<ExerciseRoutine> routines = gson.fromJson(responseBody, listType);
-                            adapter.updateRoutines(routines);
-                        } else {
-                            Toast.makeText(requireContext(), 
-                                "운동 루틴 로드 실패: " + responseBody, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-            }
-        });
-    }
-
-    private void deleteRoutine(Long routineId) {
-        SharedPreferences prefs = requireActivity().getSharedPreferences(PREF_NAME, 0);
-        String userName = prefs.getString(KEY_USER_NAME, null);
-
-        if (userName == null) {
-            Toast.makeText(requireContext(), "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Request request = new Request.Builder()
-            .url(Constants.API_ROUTINES + "/" + routineId + "?userName=" + userName)
-            .delete()
-            .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), 
-                            "운동 루틴 삭제 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-                }
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (getActivity() != null) {
-                    getActivity().runOnUiThread(() -> {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(requireContext(), 
-                                "운동 루틴이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                            loadRoutines();
-                        } else {
-                            try {
-                                ResponseBody responseBody = response.body();
-                                String errorMessage = responseBody != null ? 
-                                    responseBody.string() : "알 수 없는 오류";
-                                Toast.makeText(requireContext(), 
-                                    "운동 루틴 삭제 실패: " + errorMessage, 
-                                    Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                Toast.makeText(requireContext(), 
-                                    "운동 루틴 삭제 실패: 응답 처리 중 오류 발생", 
-                                    Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }
-            }
-        });
-    }
-
     private void clearInputs() {
         etRoutineName.setText("");
         etRoutineDescription.setText("");
@@ -258,5 +204,6 @@ public class CustomFragment extends Fragment {
             Chip chip = (Chip) chipGroupExercises.getChildAt(i);
             chip.setChecked(false);
         }
+        hideExerciseDescription();
     }
 } 
