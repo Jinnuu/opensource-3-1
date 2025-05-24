@@ -1,7 +1,0 @@
-com\example\server\entity\Workout.class
-com\example\server\controller\WorkoutController.class
-com\example\server\controller\UserController.class
-com\example\server\repository\UserRepository.class
-com\example\server\entity\User.class
-com\example\server\repository\WorkoutRepository.class
-com\example\server\ServerApplication.class
