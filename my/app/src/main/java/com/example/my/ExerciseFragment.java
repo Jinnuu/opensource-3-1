@@ -85,11 +85,10 @@ public class ExerciseFragment extends Fragment {
             "m6nnpHeH86E"  // 목 운동 영상 ID
         ));
         
-        cardCustomExercise.setOnClickListener(v -> showExerciseGuide(
-            "커스텀 운동", 
-            "나만의 맞춤 운동",
-            "m6nnpHeH86E"  // 커스텀 운동 영상 ID
-        ));
+        cardCustomExercise.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), CustomExerciseActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void showExerciseGuide(String exerciseType, String description, String videoId) {

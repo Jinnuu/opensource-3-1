@@ -30,7 +30,7 @@ public class RoutineManagementActivity extends AppCompatActivity {
         Button btnAddRoutine = findViewById(R.id.btnAddRoutine);
 
         // RecyclerView 설정
-        adapter = new RoutineAdapter(new ArrayList<>(), this::deleteRoutine);
+        adapter = new RoutineAdapter(new ArrayList<>(), this::startExercise);
         recyclerViewRoutines.setLayoutManager(new LinearLayoutManager(this));
         recyclerViewRoutines.setAdapter(adapter);
 
@@ -85,52 +85,18 @@ public class RoutineManagementActivity extends AppCompatActivity {
         });
     }
 
-    private void deleteRoutine(Long routineId) {
-        String userName = getSharedPreferences("LoginPrefs", 0)
-            .getString("user_name", null);
-
-        if (userName == null) {
-            Toast.makeText(this, "로그인이 필요합니다.", Toast.LENGTH_SHORT).show();
-            return;
+    private void startExercise(ExerciseRoutine routine) {
+        // 운동 루틴의 첫 번째 운동으로 시작
+        if (routine.getExercises() != null && !routine.getExercises().isEmpty()) {
+            Intent intent = new Intent(this, ExerciseActivity.class);
+            intent.putExtra("exercise_type", routine.getExercises().get(0));
+            intent.putExtra("routine_name", routine.getName());
+            intent.putExtra("current_exercise_index", 0);
+            intent.putExtra("total_exercises", routine.getExercises().size());
+            intent.putExtra("routine_exercises", new ArrayList<>(routine.getExercises()));
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "이 루틴에는 운동이 없습니다.", Toast.LENGTH_SHORT).show();
         }
-
-        Request request = new Request.Builder()
-            .url(Constants.API_ROUTINES + "/" + routineId + "?userName=" + userName)
-            .delete()
-            .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> {
-                    Toast.makeText(RoutineManagementActivity.this, 
-                        "운동 루틴 삭제 실패: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                runOnUiThread(() -> {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(RoutineManagementActivity.this, 
-                            "운동 루틴이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
-                        loadRoutines();
-                    } else {
-                        try {
-                            ResponseBody responseBody = response.body();
-                            String errorMessage = responseBody != null ? 
-                                responseBody.string() : "알 수 없는 오류";
-                            Toast.makeText(RoutineManagementActivity.this, 
-                                "운동 루틴 삭제 실패: " + errorMessage, 
-                                Toast.LENGTH_SHORT).show();
-                        } catch (IOException e) {
-                            Toast.makeText(RoutineManagementActivity.this, 
-                                "운동 루틴 삭제 실패: 응답 처리 중 오류 발생", 
-                                Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-            }
-        });
     }
 } 

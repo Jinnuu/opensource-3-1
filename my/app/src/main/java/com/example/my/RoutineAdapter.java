@@ -14,7 +14,7 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
     private final OnRoutineClickListener listener;
 
     public interface OnRoutineClickListener {
-        void onDeleteClick(Long routineId);
+        void onStartExercise(ExerciseRoutine routine);
     }
 
     public RoutineAdapter(List<ExerciseRoutine> routines, OnRoutineClickListener listener) {
@@ -51,9 +51,9 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
         }
         holder.tvExercises.setText(exercisesText.toString());
 
-        holder.btnDelete.setOnClickListener(v -> {
+        holder.btnStartExercise.setOnClickListener(v -> {
             if (listener != null) {
-                listener.onDeleteClick(routine.getId());
+                listener.onStartExercise(routine);
             }
         });
     }
@@ -65,14 +65,14 @@ public class RoutineAdapter extends RecyclerView.Adapter<RoutineAdapter.RoutineV
 
     static class RoutineViewHolder extends RecyclerView.ViewHolder {
         TextView tvRoutineName, tvRoutineDescription, tvExercises;
-        Button btnDelete;
+        Button btnStartExercise;
 
         RoutineViewHolder(View itemView) {
             super(itemView);
             tvRoutineName = itemView.findViewById(R.id.tvRoutineName);
             tvRoutineDescription = itemView.findViewById(R.id.tvRoutineDescription);
             tvExercises = itemView.findViewById(R.id.tvExercises);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
+            btnStartExercise = itemView.findViewById(R.id.btnStartExercise);
         }
     }
 } 

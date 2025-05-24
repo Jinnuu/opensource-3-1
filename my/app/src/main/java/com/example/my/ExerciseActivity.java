@@ -7,13 +7,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.gson.Gson;
-import okhttp3.*;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ExerciseActivity extends AppCompatActivity {
-    private static final String BASE_URL = "http://192.168.56.1:8080";  // 원래 IP 주소로 복구
     private static final long DEFAULT_EXERCISE_TIME = 180000; // 3분
 
     private TextView tvExerciseTitle;
@@ -22,14 +19,12 @@ public class ExerciseActivity extends AppCompatActivity {
     private Button btnStart, btnStop;
     private CountDownTimer timer;
     private String exerciseType;
-    private String exerciseDescription;
+    private String routineName;
+    private int currentExerciseIndex;
+    private int totalExercises;
+    private ArrayList<String> routineExercises;
     private long exerciseTime;
     private boolean isExerciseRunning = false;
-    private final OkHttpClient client = new OkHttpClient.Builder()
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
-            .writeTimeout(10, TimeUnit.SECONDS)
-            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +34,10 @@ public class ExerciseActivity extends AppCompatActivity {
         // Intent에서 데이터 가져오기
         Intent intent = getIntent();
         exerciseType = intent.getStringExtra("exercise_type");
-        exerciseDescription = intent.getStringExtra("exercise_description");
+        routineName = intent.getStringExtra("routine_name");
+        currentExerciseIndex = intent.getIntExtra("current_exercise_index", 0);
+        totalExercises = intent.getIntExtra("total_exercises", 1);
+        routineExercises = intent.getStringArrayListExtra("routine_exercises");
         exerciseTime = intent.getLongExtra("exercise_time", DEFAULT_EXERCISE_TIME);
 
         // View 초기화
@@ -50,8 +48,11 @@ public class ExerciseActivity extends AppCompatActivity {
         btnStop = findViewById(R.id.btnStop);
 
         // 운동 정보 설정
-        tvExerciseTitle.setText(exerciseType);
-        tvExerciseDescription.setText(exerciseDescription);
+        String title = routineName != null ? 
+            String.format("%s (%d/%d)", exerciseType, currentExerciseIndex + 1, totalExercises) :
+            exerciseType;
+        tvExerciseTitle.setText(title);
+        tvExerciseDescription.setText("운동을 시작하세요!");
 
         // 타이머 초기화
         long minutes = (exerciseTime / 1000) / 60;
@@ -80,7 +81,22 @@ public class ExerciseActivity extends AppCompatActivity {
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
                 saveWorkoutData(true);
-                Toast.makeText(ExerciseActivity.this, "운동이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                
+                // 다음 운동이 있는지 확인
+                if (routineExercises != null && currentExerciseIndex < totalExercises - 1) {
+                    // 다음 운동으로 이동
+                    Intent intent = new Intent(ExerciseActivity.this, ExerciseActivity.class);
+                    intent.putExtra("exercise_type", routineExercises.get(currentExerciseIndex + 1));
+                    intent.putExtra("routine_name", routineName);
+                    intent.putExtra("current_exercise_index", currentExerciseIndex + 1);
+                    intent.putExtra("total_exercises", totalExercises);
+                    intent.putExtra("routine_exercises", routineExercises);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(ExerciseActivity.this, "모든 운동이 완료되었습니다!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
         };
     }
@@ -103,7 +119,7 @@ public class ExerciseActivity extends AppCompatActivity {
         isExerciseRunning = true;
         btnStart.setEnabled(false);
         btnStop.setEnabled(true);
-        initializeTimer(); // 타이머를 새로 초기화
+        initializeTimer();
         timer.start();
         Toast.makeText(this, "운동을 시작합니다!", Toast.LENGTH_SHORT).show();
     }
@@ -118,48 +134,8 @@ public class ExerciseActivity extends AppCompatActivity {
     }
 
     private void saveWorkoutData(boolean completed) {
-        WorkoutData workoutData = new WorkoutData(exerciseType, exerciseTime, completed);
-        String json = new Gson().toJson(workoutData);
-
-        // SharedPreferences에서 토큰 가져오기
-        android.content.SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        String token = prefs.getString("auth_token", "");
-
-        RequestBody body = RequestBody.create(
-            MediaType.parse("application/json; charset=utf-8"), json);
-
-        Request request = new Request.Builder()
-            .url(BASE_URL + "/workouts")
-            .addHeader("Authorization", "Bearer " + token)
-            .post(body)
-            .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                runOnUiThread(() -> {
-                    String errorMessage = "서버 연결 실패: " + e.getMessage() + "\nURL: " + BASE_URL + "/workouts";
-                    Toast.makeText(ExerciseActivity.this, errorMessage, Toast.LENGTH_LONG).show();
-                });
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) {
-                runOnUiThread(() -> {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(ExerciseActivity.this, 
-                            "운동 데이터가 저장되었습니다.", 
-                            Toast.LENGTH_SHORT).show();
-                    } else {
-                        String errorMessage = "서버 응답 실패: " + response.code() + "\nURL: " + BASE_URL + "/workouts";
-                        if (response.code() == 401) {
-                            errorMessage += "\n인증이 필요합니다. 다시 로그인해주세요.";
-                        }
-                        Toast.makeText(ExerciseActivity.this, errorMessage, Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
-        });
+        // 운동 데이터 저장 로직
+        // TODO: 서버에 운동 데이터 저장
     }
 
     @Override
