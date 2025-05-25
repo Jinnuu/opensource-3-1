@@ -23,83 +23,101 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp"
+            android:gravity="center_horizontal">
 
-            <!-- 커스텀 워크아웃 루틴 -->
+            <!-- 카드 1: 커스텀 워크아웃 루틴 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="520dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_card"
-                android:padding="20dp"
-                android:layout_marginBottom="24dp"
-                android:elevation="2dp">
+                android:padding="28dp"
+                android:layout_marginBottom="32dp"
+                android:elevation="6dp"
+                android:gravity="top|center_horizontal">
 
+                <!-- 텍스트를 맨 위로 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="나만의 커스텀 워크아웃 루틴을 쉽고 빠르게 만들 수 있습니다."
-                    android:textSize="18sp"
+                    android:textSize="19sp"
                     android:textColor="@color/primaryGreen"
-                    android:lineSpacingExtra="6dp"
-                    android:layout_marginBottom="12dp"/>
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="7dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp"/>
 
+                <!-- 이미지 크기 조정 (더 크게) -->
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/ic_custom_routine"
                     android:contentDescription="커스텀 루틴 이미지"
                     android:scaleType="fitCenter"/>
             </LinearLayout>
 
-            <!-- 다양한 운동 데이터베이스 -->
+            <!-- 카드 2: 다양한 운동 데이터베이스 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="520dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_card"
-                android:padding="20dp"
-                android:layout_marginBottom="24dp"
-                android:elevation="2dp">
+                android:padding="28dp"
+                android:layout_marginBottom="32dp"
+                android:elevation="6dp"
+                android:gravity="top|center_horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="다양한 운동 데이터베이스에 자유롭게 액세스할 수 있습니다."
-                    android:textSize="18sp"
+                    android:textSize="19sp"
                     android:textColor="@color/primaryGreen"
-                    android:lineSpacingExtra="6dp"
-                    android:layout_marginBottom="12dp"/>
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="7dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp"/>
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/ic_workout_db"
                     android:contentDescription="운동 데이터베이스 이미지"
                     android:scaleType="fitCenter"/>
             </LinearLayout>
 
-            <!-- 리포트(진척도 트래킹) -->
+            <!-- 카드 3: 리포트(진척도 트래킹) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:minHeight="520dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_card"
-                android:padding="20dp"
-                android:elevation="2dp">
+                android:padding="28dp"
+                android:elevation="6dp"
+                android:gravity="top|center_horizontal">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="진척도 트래킹을 위한 직관적인 도표 리포트 기능을 제공합니다."
-                    android:textSize="18sp"
+                    android:textSize="19sp"
                     android:textColor="@color/primaryGreen"
-                    android:lineSpacingExtra="6dp"
-                    android:layout_marginBottom="12dp"/>
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="7dp"
+                    android:gravity="center"
+                    android:layout_marginBottom="24dp"/>
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="200dp"
                     android:src="@drawable/ic_report_chart"
                     android:contentDescription="진척도 리포트 이미지"
                     android:scaleType="fitCenter"/>
@@ -118,7 +136,7 @@
         android:textColor="@color/white"
         android:backgroundTint="@color/primaryGreen"
         app:cornerRadius="32dp"
-        android:layout_margin="24dp"
+        android:layout_margin="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

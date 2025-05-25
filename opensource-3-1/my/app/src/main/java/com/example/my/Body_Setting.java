@@ -1,10 +1,12 @@
 package com.example.my;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import androidx.activity.EdgeToEdge;
@@ -14,9 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Body_Setting extends AppCompatActivity {
 
@@ -27,7 +27,6 @@ public class Body_Setting extends AppCompatActivity {
 
     private Button btnBack, btnShoulder, btnArm, btnChest, btnAbs, btnHip, btnLeg, btnFull, btnNext;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,8 +73,26 @@ public class Body_Setting extends AppCompatActivity {
         btnLeg.setOnClickListener(partClickListener);
         btnFull.setOnClickListener(partClickListener);
 
-        // 다음 버튼 리스너
-        btnNext.setOnClickListener(v -> navigateToExerciseFragment());
+        // 다음 버튼 클릭 시 ExerciseFragment로 전환
+        btnNext.setOnClickListener(v -> {
+            // 1. 신체설정 완료 상태 저장
+            SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+            prefs.edit().putBoolean("is_body_setting_done", true).apply();
+
+            // 2. 선택한 부위 리스트 준비
+            List<String> orderedParts = new ArrayList<>(selectedParts);
+            for (String part : allParts) {
+                if (!orderedParts.contains(part)) {
+                    orderedParts.add(part);
+                }
+            }
+
+            // 3. MainActivity로 이동하면서 데이터 전달
+            Intent intent = new Intent(Body_Setting.this, MainActivity.class);
+            intent.putStringArrayListExtra("orderedParts", new ArrayList<>(orderedParts));
+            startActivity(intent);
+            finish(); // Body_Setting 화면 종료
+        });
     }
 
     private void toggleSelection(String part, Button button) {
@@ -86,22 +103,5 @@ public class Body_Setting extends AppCompatActivity {
             selectedParts.add(part);
             button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FFA0A0"))); // 선택된 색상
         }
-    }
-
-    private void navigateToExerciseFragment() {
-        // 1. 선택한 부위(중복X, 순서O)
-        List<String> orderedParts = new ArrayList<>(selectedParts);
-
-        // 2. 나머지 부위(중복X, 기존 선택에 없는 것만)
-        for (String part : allParts) {
-            if (!orderedParts.contains(part)) {
-                orderedParts.add(part);
-            }
-        }
-
-        // 3. 전달
-        Intent intent = new Intent(this, ExerciseActivity.class); // ExerciseFragment가 아니라 Activity로!
-        intent.putStringArrayListExtra("orderedParts", new ArrayList<>(orderedParts));
-        startActivity(intent);
     }
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class ExerciseActivity extends AppCompatActivity {
-    private static final String BASE_URL = "http://192.168.56.1:8080";  // 원래 IP 주소로 복구
+    private static final String BASE_URL = "http://192.168.1.100:8080";  // 원래 IP 주소로 복구
     private static final long DEFAULT_EXERCISE_TIME = 180000; // 3분
 
     private TextView tvExerciseTitle;

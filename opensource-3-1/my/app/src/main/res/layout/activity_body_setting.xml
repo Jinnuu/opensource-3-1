@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
     android:gravity="center_horizontal"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:id="@+id/main">
 
     <!-- 상단 타이틀 -->
     <TextView
@@ -39,69 +41,69 @@
             android:alignmentMode="alignMargins"
             android:useDefaultMargins="true">
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_back"
                 android:text="등"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_shoulder"
                 android:text="어깨"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_arm"
                 android:text="팔"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_chest"
                 android:text="가슴"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_abs"
                 android:text="복근"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_hip"
                 android:text="엉덩이"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_leg"
                 android:text="다리"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_full"
                 android:text="전신"
                 android:backgroundTint="@color/primaryGreen"
                 android:textColor="@color/white"
                 android:layout_margin="6dp"
-                android:cornerRadius="16dp"/>
+                app:cornerRadius="16dp"/>
         </GridLayout>
     </LinearLayout>
 
@@ -123,7 +125,7 @@
     </LinearLayout>
 
     <!-- 다음 버튼 -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_next"
         android:text="다음"
         android:layout_width="match_parent"
@@ -134,5 +136,12 @@
         android:backgroundTint="@color/primaryGreen"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:cornerRadius="24dp"/>
+        app:cornerRadius="24dp"/>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"/>
 </LinearLayout>

@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class ExerciseFragment extends Fragment {
-    private static final String ARG_SELECTED_PARTS = "selected_parts";
+    public static final String ARG_SELECTED_PARTS = "selected_parts";
     private static final String PREF_NAME = "ExercisePrefs";
     private static final String KEY_INSTALL_DATE = "install_date";
 
@@ -34,13 +34,15 @@ public class ExerciseFragment extends Fragment {
     private LinearLayout cardContainer;
     private List<String> selectedParts = new ArrayList<>();
 
-    public static ExerciseFragment newInstance(ArrayList<String> selectedParts) {
+    // ExerciseFragment.java
+    public static ExerciseFragment newInstance(ArrayList<String> orderedParts) {
         ExerciseFragment fragment = new ExerciseFragment();
         Bundle args = new Bundle();
-        args.putStringArrayList(ARG_SELECTED_PARTS, selectedParts);
+        args.putStringArrayList(ARG_SELECTED_PARTS, orderedParts);
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

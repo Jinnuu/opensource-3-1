@@ -42,6 +42,12 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
             case "back" -> "등 운동";
             case "neck" -> "목 운동";
             case "custom" -> "커스텀 운동";
+            case "abs" -> "복근 운동";
+            case "arm" -> "팔 운동";
+            case "full" -> "전신 운동";
+            case "hip" -> "엉덩이 운동";
+            case "leg" -> "다리 운동";
+            case "shoulder" -> "어깨 운동";
             default -> workout.getType();
         };
         

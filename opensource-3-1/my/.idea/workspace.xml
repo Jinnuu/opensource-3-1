@@ -85,6 +85,16 @@
           <theme>@style/Theme.My</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_routine_management.xml">
+        <config>
+          <theme>@style/Theme.My</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
+        <config>
+          <theme>@style/Theme.My</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_shoulder_exercise.xml">
         <config>
           <theme>@style/Theme.My</theme>
@@ -115,12 +125,22 @@
           <theme>@style/Theme.My</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_exercise_guide.xml">
+        <config>
+          <theme>@style/Theme.My</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_report.xml">
         <config>
           <theme>@style/Theme.My</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml">
+        <config>
+          <theme>@style/Theme.My</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/item_routine.xml">
         <config>
           <theme>@style/Theme.My</theme>
         </config>
@@ -136,7 +156,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f0a800a-6a29-4e71-b10b-2d93c85223a5" name="Changes" comment="&quot;guide upload&quot;" />
+    <list default="true" id="5f0a800a-6a29-4e71-b10b-2d93c85223a5" name="Changes" comment="setting[password change, withdraw, logout] change clickable" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +204,7 @@
   }
 }</component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="_Designer_Tab" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
