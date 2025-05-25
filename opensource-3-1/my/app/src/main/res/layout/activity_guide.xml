@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".Guide_Activity">
+
+    <!-- 스크롤 가능한 주요 내용 -->
+    <ScrollView
+        android:id="@+id/guideScroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_start"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- 커스텀 워크아웃 루틴 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_card"
+                android:padding="20dp"
+                android:layout_marginBottom="24dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="나만의 커스텀 워크아웃 루틴을 쉽고 빠르게 만들 수 있습니다."
+                    android:textSize="18sp"
+                    android:textColor="@color/primaryGreen"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/ic_custom_routine"
+                    android:contentDescription="커스텀 루틴 이미지"
+                    android:scaleType="fitCenter"/>
+            </LinearLayout>
+
+            <!-- 다양한 운동 데이터베이스 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_card"
+                android:padding="20dp"
+                android:layout_marginBottom="24dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="다양한 운동 데이터베이스에 자유롭게 액세스할 수 있습니다."
+                    android:textSize="18sp"
+                    android:textColor="@color/primaryGreen"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/ic_workout_db"
+                    android:contentDescription="운동 데이터베이스 이미지"
+                    android:scaleType="fitCenter"/>
+            </LinearLayout>
+
+            <!-- 리포트(진척도 트래킹) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_card"
+                android:padding="20dp"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="진척도 트래킹을 위한 직관적인 도표 리포트 기능을 제공합니다."
+                    android:textSize="18sp"
+                    android:textColor="@color/primaryGreen"
+                    android:lineSpacingExtra="6dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:src="@drawable/ic_report_chart"
+                    android:contentDescription="진척도 리포트 이미지"
+                    android:scaleType="fitCenter"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- 하단 고정: 시작하기 버튼 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="시작하기"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/primaryGreen"
+        app:cornerRadius="32dp"
+        android:layout_margin="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
