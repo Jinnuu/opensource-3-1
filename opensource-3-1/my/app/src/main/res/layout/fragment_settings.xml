@@ -182,11 +182,17 @@
                     android:id="@+id/tvChangePassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
                     android:text="비밀번호 변경"
                     android:textColor="#222222"
                     android:textSize="15sp"
                     android:paddingTop="6dp"
-                    android:paddingBottom="6dp"/>
+                    android:paddingBottom="6dp"
+                    android:background="@android:drawable/list_selector_background"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
 
                 <View
                     android:layout_width="match_parent"
@@ -250,11 +256,16 @@
                     android:id="@+id/tvWithdraw"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
                     android:text="회원 탈퇴"
                     android:textColor="#222222"
                     android:textSize="15sp"
                     android:paddingTop="6dp"
-                    android:paddingBottom="6dp"/>
+                    android:paddingBottom="6dp"
+                    android:background="@android:drawable/list_selector_background"
+                    android:clickable="true"
+                    android:focusable="true"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -267,11 +278,16 @@
                     android:id="@+id/tvLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:minWidth="48dp"
                     android:text="로그아웃"
                     android:textColor="#222222"
                     android:textSize="15sp"
                     android:paddingTop="6dp"
-                    android:paddingBottom="6dp"/>
+                    android:paddingBottom="6dp"
+                    android:background="@android:drawable/list_selector_background"
+                    android:clickable="true"
+                    android:focusable="true"/>
             </LinearLayout>
 
         </LinearLayout>

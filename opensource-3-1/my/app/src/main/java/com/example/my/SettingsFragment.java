@@ -21,7 +21,7 @@ public class SettingsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // "재활 부위 선택" 버튼 클릭 시 BodySettingActivity로 이동
+        // "재활 부위 선택" 버튼 클릭 시 Body_SettingActivity로 이동
         MaterialButton btnMyProfile = view.findViewById(R.id.btnMyProfile);
         btnMyProfile.setOnClickListener(v -> {
             Intent intent = new Intent(requireContext(), Body_Setting.class);

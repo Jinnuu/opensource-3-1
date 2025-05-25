@@ -16,6 +16,27 @@
         android:theme="@style/Theme.My"
         tools:targetApi="31">
         <activity
+            android:name=".FullBodyExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LegExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HipExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AbsExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChestExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ArmExerciseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ShoulderExerciseActivity"
+            android:exported="false" />
+        <activity
             android:name=".Guide_Activity"
             android:exported="false" />
         <activity

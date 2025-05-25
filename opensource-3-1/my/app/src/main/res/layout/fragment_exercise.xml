@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true">
 
     <LinearLayout
+        android:id="@+id/card_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -44,7 +46,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 운동 카테고리 버튼들 -->
+        <!-- 운동 카테고리 타이틀 -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +55,7 @@
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
 
-        <!-- 손목 운동 버튼 -->
+        <!-- 손목 운동 카드 -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardWristExercise"
             android:layout_width="match_parent"
@@ -97,7 +99,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 허리 운동 버튼 -->
+        <!-- 허리 운동 카드 -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardBackExercise"
             android:layout_width="match_parent"
@@ -141,7 +143,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 목 운동 버튼 -->
+        <!-- 목 운동 카드 -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardNeckExercise"
             android:layout_width="match_parent"
@@ -185,7 +187,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 커스텀 운동 버튼 -->
+        <!-- 커스텀 운동 카드 -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCustomExercise"
             android:layout_width="match_parent"
@@ -229,5 +231,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <!-- 동적으로 운동 카드뷰를 추가하려면, 이 아래에 addView로 추가하면 됩니다. -->
+
     </LinearLayout>
-</ScrollView> 
+</ScrollView>
