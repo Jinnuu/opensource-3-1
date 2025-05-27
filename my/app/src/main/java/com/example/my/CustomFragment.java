@@ -84,10 +84,55 @@ public class CustomFragment extends Fragment {
             "2. 목 회전 운동\n" +
             "3. 어깨 으쓱하기\n\n" +
             "주의사항: 갑작스러운 움직임을 피하고 천천히 진행하세요.");
+
+        exerciseDescriptions.put("어깨 운동",
+            "어깨 근육을 강화하고 유연성을 높이는 운동입니다.\n\n" +
+            "1. 어깨 프레스\n" +
+            "2. 사이드 레터럴 레이즈\n" +
+            "3. 프론트 레이즈\n\n" +
+            "주의사항: 무거운 무게는 피하고 천천히 진행하세요.");
+
+        exerciseDescriptions.put("팔 운동",
+            "상완근과 전완근을 강화하는 운동입니다.\n\n" +
+            "1. 덤벨 컬\n" +
+            "2. 트라이셉스 익스텐션\n" +
+            "3. 해머 컬\n\n" +
+            "주의사항: 적절한 무게를 선택하고 자세를 유지하세요.");
+
+        exerciseDescriptions.put("가슴 운동",
+            "대흉근을 발달시키는 운동입니다.\n\n" +
+            "1. 푸시업\n" +
+            "2. 덤벨 플라이\n" +
+            "3. 벤치 프레스\n\n" +
+            "주의사항: 어깨와 팔꿈치 각도를 유지하세요.");
+
+        exerciseDescriptions.put("복근 운동",
+            "복근과 코어 근육을 강화하는 운동입니다.\n\n" +
+            "1. 크런치\n" +
+            "2. 플랭크\n" +
+            "3. 레그 레이즈\n\n" +
+            "주의사항: 허리를 보호하기 위해 천천히 진행하세요.");
+
+        exerciseDescriptions.put("엉덩이 운동",
+            "둔근을 강화하고 발달시키는 운동입니다.\n\n" +
+            "1. 스쿼트\n" +
+            "2. 힙 쓰러스트\n" +
+            "3. 글루트 브릿지\n\n" +
+            "주의사항: 무릎이 발끝을 넘지 않도록 주의하세요.");
+
+        exerciseDescriptions.put("다리 운동",
+            "하체 근력을 강화하는 운동입니다.\n\n" +
+            "1. 스쿼트\n" +
+            "2. 런지\n" +
+            "3. 레그 프레스\n\n" +
+            "주의사항: 무릎 관절을 보호하기 위해 자세를 유지하세요.");
     }
 
     private void addExerciseChips() {
-        String[] exercises = {"손목 운동", "등 운동", "목 운동"};
+        String[] exercises = {
+            "손목 운동", "등 운동", "목 운동", "어깨 운동", 
+            "팔 운동", "가슴 운동", "복근 운동", "엉덩이 운동", "다리 운동"
+        };
         for (String exercise : exercises) {
             Chip chip = new Chip(requireContext());
             chip.setText(exercise);

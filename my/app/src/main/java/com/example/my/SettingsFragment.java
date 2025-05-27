@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import okhttp3.*;
 import java.io.IOException;
@@ -25,6 +26,20 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                            Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        // 재활 부위 선택 버튼
+        MaterialButton btnMyProfile = view.findViewById(R.id.btnMyProfile);
+        btnMyProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Body_Setting.class);
+            startActivity(intent);
+        });
+
+        // 가이드 보기 버튼
+        MaterialButton btnAppGuide = view.findViewById(R.id.btnAppGuide);
+        btnAppGuide.setOnClickListener(v -> {
+            Intent intent = new Intent(getActivity(), Guide_Activity.class);
+            startActivity(intent);
+        });
 
         // 비밀번호 변경
         TextView tvChangePassword = view.findViewById(R.id.tvChangePassword);

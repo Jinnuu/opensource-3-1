@@ -41,6 +41,15 @@
         <activity
             android:name=".CustomExerciseActivity"
             android:exported="false" />
+        <activity
+            android:name=".Body_Setting"
+            android:exported="false" />
+        <activity
+            android:name=".Guide_Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ExerciseGuideActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

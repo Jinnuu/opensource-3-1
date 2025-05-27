@@ -23,7 +23,9 @@ import java.util.Map;
 
 public class ExerciseFragment extends Fragment {
     private TextView tvDayCount;
-    private CardView cardWristExercise, cardBackExercise, cardNeckExercise, cardCustomExercise;
+    private CardView cardWristExercise, cardBackExercise, cardNeckExercise, cardCustomExercise,
+                    cardShoulderExercise, cardArmExercise, cardChestExercise, cardAbsExercise,
+                    cardHipExercise, cardLegExercise;
     private static final String PREF_NAME = "ExercisePrefs";
     private static final String KEY_INSTALL_DATE = "install_date";
     private String currentUserName;
@@ -42,6 +44,12 @@ public class ExerciseFragment extends Fragment {
         cardBackExercise = view.findViewById(R.id.cardBackExercise);
         cardNeckExercise = view.findViewById(R.id.cardNeckExercise);
         cardCustomExercise = view.findViewById(R.id.cardCustomExercise);
+        cardShoulderExercise = view.findViewById(R.id.cardShoulderExercise);
+        cardArmExercise = view.findViewById(R.id.cardArmExercise);
+        cardChestExercise = view.findViewById(R.id.cardChestExercise);
+        cardAbsExercise = view.findViewById(R.id.cardAbsExercise);
+        cardHipExercise = view.findViewById(R.id.cardHipExercise);
+        cardLegExercise = view.findViewById(R.id.cardLegExercise);
 
         // 회원가입 후 경과일수 가져오기
         if (currentUserName != null) {
@@ -105,6 +113,42 @@ public class ExerciseFragment extends Fragment {
             "목 통증 완화를 위한 스트레칭",
             "m6nnpHeH86E"  // 목 운동 영상 ID
         ));
+
+        cardShoulderExercise.setOnClickListener(v -> showExerciseGuide(
+            "어깨 운동",
+            "어깨 근력 강화를 위한 운동",
+            "m6nnpHeH86E"  // 어깨 운동 영상 ID
+        ));
+
+        cardArmExercise.setOnClickListener(v -> showExerciseGuide(
+            "팔 운동",
+            "상완근과 전완근 강화 운동",
+            "m6nnpHeH86E"  // 팔 운동 영상 ID
+        ));
+
+        cardChestExercise.setOnClickListener(v -> showExerciseGuide(
+            "가슴 운동",
+            "대흉근 강화를 위한 운동",
+            "m6nnpHeH86E"  // 가슴 운동 영상 ID
+        ));
+
+        cardAbsExercise.setOnClickListener(v -> showExerciseGuide(
+            "복근 운동",
+            "복근 강화를 위한 코어 운동",
+            "m6nnpHeH86E"  // 복근 운동 영상 ID
+        ));
+
+        cardHipExercise.setOnClickListener(v -> showExerciseGuide(
+            "엉덩이 운동",
+            "둔근 강화를 위한 운동",
+            "m6nnpHeH86E"  // 엉덩이 운동 영상 ID
+        ));
+
+        cardLegExercise.setOnClickListener(v -> showExerciseGuide(
+            "다리 운동",
+            "하체 근력 강화를 위한 운동",
+            "m6nnpHeH86E"  // 다리 운동 영상 ID
+        ));
         
         cardCustomExercise.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), CustomExerciseActivity.class);
@@ -113,11 +157,21 @@ public class ExerciseFragment extends Fragment {
     }
 
     private void showExerciseGuide(String exerciseType, String description, String videoId) {
-        exercise_guide guide = exercise_guide.newInstance(exerciseType, description, videoId);
-        getParentFragmentManager().beginTransaction()
-            .replace(R.id.fragment_container, guide)
-            .addToBackStack(null)
-            .commit();
+        try {
+            if (getActivity() == null) {
+                Toast.makeText(getContext(), "활동이 유효하지 않습니다.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            Intent intent = new Intent(getActivity(), ExerciseGuideActivity.class);
+            intent.putExtra("exercise_type", exerciseType);
+            intent.putExtra("exercise_description", description);
+            intent.putExtra("video_id", videoId);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "운동 가이드를 불러오는데 실패했습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void startExercise(String exerciseType) {
