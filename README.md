@@ -2,7 +2,7 @@
 어르신 활력 프로젝트
 Empowering Lives for Senior Activity
 
-#TEAM
+# TEAM
 ![table](imgs/table.png)
 
 ## 프로젝트 개요
