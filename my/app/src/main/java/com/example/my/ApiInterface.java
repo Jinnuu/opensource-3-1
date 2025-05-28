@@ -5,6 +5,8 @@ import retrofit2.http.*;
 
 import java.util.Map;
 
+//API 통신을 위한 인터페이스 (엔드포인트 정의의)
+
 public interface ApiInterface {
     @POST("api/users/register")
     Call<Map<String, String>> register(@Body Map<String, String> user);

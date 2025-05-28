@@ -16,6 +16,8 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import java.io.IOException;
 
+// 설정 프래그먼트 (환경 설정 화면)
+
 public class SettingsFragment extends Fragment {
     private static final String PREF_NAME = "LoginPrefs";
     private static final String KEY_USER_NAME = "user_name";

@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 
+//사용자 엔티티
+
 @Entity
 @Table(name = "users")
 public class User {

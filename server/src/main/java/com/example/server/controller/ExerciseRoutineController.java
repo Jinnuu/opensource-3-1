@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+//운동 루틴 관련 요청을 처리하는 컨트롤러
+
 @RestController
 @RequestMapping("/api/routines")
 public class ExerciseRoutineController {

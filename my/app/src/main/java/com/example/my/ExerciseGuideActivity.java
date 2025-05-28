@@ -9,6 +9,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+// 운동 가이드 화면
+
 public class ExerciseGuideActivity extends AppCompatActivity {
     private String exerciseType;
     private String exerciseDescription;

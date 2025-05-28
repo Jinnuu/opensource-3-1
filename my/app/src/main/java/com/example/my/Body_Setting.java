@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// 신체 설정 화면 (환경 설정에서 연결)
+
 public class Body_Setting extends AppCompatActivity {
 
     // 전체 부위 리스트

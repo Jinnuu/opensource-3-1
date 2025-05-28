@@ -3,6 +3,8 @@ package com.example.server.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+//운동 루틴 엔티티
+
 @Entity
 @Table(name = "exercise_routines")
 public class ExerciseRoutine {

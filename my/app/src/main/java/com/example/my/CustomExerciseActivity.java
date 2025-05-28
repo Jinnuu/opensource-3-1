@@ -15,6 +15,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+// 사용자 정의 운동 루틴 화면
+
 public class CustomExerciseActivity extends AppCompatActivity {
     private RecyclerView recyclerViewRoutines;
     private RoutineAdapter adapter;

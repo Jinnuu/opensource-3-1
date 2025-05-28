@@ -14,6 +14,8 @@ import okhttp3.*;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+// 회원가입 화면
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText etName, etPassword;
     private Button btnRegister, btnGoToLogin;

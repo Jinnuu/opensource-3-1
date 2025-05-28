@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+//서버의 보안 정책(인증, 권한 등)을 설정
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

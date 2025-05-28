@@ -2,6 +2,8 @@ package com.example.my;
 
 import java.util.Date;
 
+// 운동 기록 데이터 클래스
+
 public class WorkoutData {
     private Long id;
     private String exerciseType;

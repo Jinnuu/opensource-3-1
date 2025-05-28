@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+// 운동 기록 프래그먼트
+
 public class ReportFragment extends Fragment {
     private static final String TAG = "ReportFragment";
     private TableLayout tableLayout;

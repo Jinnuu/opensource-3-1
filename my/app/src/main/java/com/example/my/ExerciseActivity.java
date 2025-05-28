@@ -21,6 +21,8 @@ import okhttp3.Response;
 import com.google.gson.Gson;
 import java.util.Date;
 
+// 운동 활동 화면
+
 public class ExerciseActivity extends AppCompatActivity {
     private static final long DEFAULT_EXERCISE_TIME = 180000; // 3분
 

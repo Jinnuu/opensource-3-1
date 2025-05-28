@@ -2,6 +2,8 @@ package com.example.my;
 
 import java.util.List;
 
+// 운동 루틴 정보 클래스
+
 public class ExerciseRoutine {
     private Long id;
     private String name;

@@ -1,8 +1,10 @@
 package com.example.my;
 
+// 상수 클래스 (서버 엔드포인트 정의)
+
 public class Constants {
     // WiFi IP 주소 사용
-    public static final String BASE_URL = "http://192.168.1.105:8080";
+    public static final String BASE_URL = "http://172.30.68.82:8080";
     public static final String API_USERS = BASE_URL + "/api/users";
     public static final String API_LOGIN = BASE_URL + "/api/login";
     public static final String API_REGISTER = BASE_URL + "/api/register";

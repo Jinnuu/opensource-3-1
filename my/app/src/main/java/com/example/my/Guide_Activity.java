@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.button.MaterialButton;
 
+// 운동 가이드 화면
+
 public class Guide_Activity extends AppCompatActivity {
     private MaterialButton btnStart;
 

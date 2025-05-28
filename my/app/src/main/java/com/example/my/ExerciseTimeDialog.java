@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.NumberPicker;
 import androidx.annotation.NonNull;
 
+// 운동 시간 설정 다이얼로그
+
 public class ExerciseTimeDialog extends Dialog {
     private OnTimeSelectedListener listener;
     private NumberPicker npMinutes;

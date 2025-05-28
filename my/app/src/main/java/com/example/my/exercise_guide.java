@@ -18,6 +18,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstan
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
+// 운동 가이드 화면
+
 public class exercise_guide extends Fragment {
     private static final String ARG_EXERCISE_TYPE = "exercise_type";
     private static final String ARG_EXERCISE_DESCRIPTION = "exercise_description";

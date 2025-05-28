@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//운동 기록 관련 데이터베이스 조작을 담당하는 리포지토리
+
 @Repository
 public interface WorkoutRepository extends JpaRepository<Workout, Long> {
     List<Workout> findByUserOrderByDateDesc(User user);

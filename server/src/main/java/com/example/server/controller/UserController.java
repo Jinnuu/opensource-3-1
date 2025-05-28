@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+//사용자 관련 요청(로그인, 회원가입 등등)을 처리하는 컨트롤러
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

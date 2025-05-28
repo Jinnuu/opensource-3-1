@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// 사용자 정의 운동 루틴 화면
+
 public class CustomFragment extends Fragment {
     private EditText etRoutineName, etRoutineDescription;
     private ChipGroup chipGroupExercises;

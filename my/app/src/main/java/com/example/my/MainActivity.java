@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+// 메인 화면
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigation;

@@ -3,6 +3,8 @@ package com.example.server.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
+//운동 기록 엔티티
+
 @Entity
 @Table(name = "workouts")
 public class Workout {

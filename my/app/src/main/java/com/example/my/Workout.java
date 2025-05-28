@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+// 운동 기록 클래스
+
 public class Workout {
     private String type;        // 운동 종류 (wrist, back, neck, custom)
     private int duration;       // 운동 시간 (초 단위)

@@ -15,6 +15,8 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+// 운동 루틴 관리 화면
+
 public class RoutineManagementActivity extends AppCompatActivity {
     private RecyclerView recyclerViewRoutines;
     private RoutineAdapter adapter;

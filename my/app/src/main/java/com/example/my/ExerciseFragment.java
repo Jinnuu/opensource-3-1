@@ -21,6 +21,8 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.Map;
 
+// 운동 프래그먼트 (운동 목록 화면)
+
 public class ExerciseFragment extends Fragment {
     private TextView tvDayCount;
     private CardView cardWristExercise, cardBackExercise, cardNeckExercise, cardCustomExercise,

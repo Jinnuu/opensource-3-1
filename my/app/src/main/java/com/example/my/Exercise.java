@@ -1,5 +1,7 @@
 package com.example.my;
 
+// 운동 정보 클래스
+
 public class Exercise {
     private String name;
     private String description;

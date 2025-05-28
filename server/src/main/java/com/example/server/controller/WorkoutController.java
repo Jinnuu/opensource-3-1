@@ -14,6 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//운동 기록 관련 요청을 처리하는 컨트롤러
+
 @RestController
 @RequestMapping("/api/workouts")
 @CrossOrigin(origins = "*")  // CORS 설정 추가
