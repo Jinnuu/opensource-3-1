@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="나만의 운동 루틴 만들기"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/btnViewSavedRoutines"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장된 루틴 보기"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRoutineName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="루틴 이름"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRoutineDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="루틴 설명"
+                android:inputType="textMultiLine"
+                android:minLines="2"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동 종류 선택"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupExercises"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleSelection="false"/>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tvExerciseDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnSaveRoutine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#17B978"
+            android:text="루틴 저장"/>
+
+    </LinearLayout>
+
+</ScrollView> 
