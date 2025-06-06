@@ -67,8 +67,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="운동 종류 선택"
+            android:text="재활 부위 선택"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupParts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:singleSelection="true"/>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="선택한 부위의 운동 목록"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
         <HorizontalScrollView
@@ -98,7 +120,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="#17B978"
-            android:text="루틴 저장"/>
+            android:text="루틴 저장"
+            android:layout_marginBottom="8dp"/>
+
+
 
     </LinearLayout>
 

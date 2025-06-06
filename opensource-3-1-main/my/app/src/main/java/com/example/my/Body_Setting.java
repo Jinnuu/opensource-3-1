@@ -46,10 +46,6 @@ public class Body_Setting extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-        // 완료 버튼 클릭 리스너
-        Button btnComplete = findViewById(R.id.btn_next);
-        btnComplete.setOnClickListener(v -> saveSelectedPartsAndMoveToMain());
     }
 
     private void initViews() {
@@ -76,6 +72,7 @@ public class Body_Setting extends AppCompatActivity {
         btnNext.setOnClickListener(v -> {
             // 1. 신체설정 완료 상태 저장
             SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+            String userName = getIntent().getStringExtra("userName");
 
             // 선택된 부위들을 JSON 문자열로 변환
             Gson gson = new Gson();
@@ -84,19 +81,13 @@ public class Body_Setting extends AppCompatActivity {
             prefs.edit()
                     .putBoolean("is_body_setting_done", true)
                     .putString("selected_parts", selectedPartsJson)
+                    .putBoolean(PREF_NAME + "_" + userName + "_body_setting", true)
                     .apply();
 
-            // 2. 선택한 부위 리스트 준비
-            List<String> orderedParts = new ArrayList<>(selectedParts);
-            for (String part : allParts) {
-                if (!orderedParts.contains(part)) {
-                    orderedParts.add(part);
-                }
-            }
-
-            // 3. MainActivity로 이동하면서 데이터 전달
+            // 2. MainActivity로 이동하면서 데이터 전달
             Intent intent = new Intent(Body_Setting.this, MainActivity.class);
-            intent.putStringArrayListExtra("orderedParts", new ArrayList<>(orderedParts));
+            intent.putStringArrayListExtra("orderedParts", new ArrayList<>(selectedParts));
+            intent.putExtra("userName", userName);
             startActivity(intent);
             finish(); // Body_Setting 화면 종료
         });
@@ -164,27 +155,5 @@ public class Body_Setting extends AppCompatActivity {
                     break;
             }
         }
-    }
-
-    private void saveSelectedPartsAndMoveToMain() {
-        // 선택된 부위 정보를 SharedPreferences에 저장
-        SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        // 선택된 부위 목록을 JSON으로 변환
-        Gson gson = new Gson();
-        String selectedPartsJson = gson.toJson(selectedParts);
-        editor.putString("selected_parts", selectedPartsJson);
-
-        // Body Setting 완료 상태 저장
-        String userName = getIntent().getStringExtra("userName");
-        editor.putBoolean(PREF_NAME + "_" + userName + "_body_setting", true);
-        editor.apply();
-
-        // MainActivity로 이동
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("userName", userName);
-        startActivity(intent);
-        finish();
     }
 }

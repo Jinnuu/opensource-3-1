@@ -34,7 +34,6 @@ public class LoginActivity extends AppCompatActivity {
     private static final String PREF_NAME = "LoginPrefs";
     private static final String KEY_USER_NAME = "user_name";
     private static final String KEY_KEEP_LOGGED_IN = "keep_logged_in";
-    private static final String KEY_FIRST_LOGIN = "is_first_login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,43 +107,28 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    Log.d(TAG, "Login response code: " + response.code());
                     String responseBody = response.body().string();
+                    Log.d(TAG, "Login response code: " + response.code());
                     Log.d(TAG, "Login response body: " + responseBody);
 
-                    if (response.isSuccessful()) {
-                        SharedPreferences prefs = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-                        boolean isFirstLogin = !prefs.contains(KEY_USER_NAME + "_" + name + "_body_setting");
+                    runOnUiThread(() -> {
+                        if (response.isSuccessful()) {
+                            // 로그인 성공 시 사용자 이름 저장
+                            SharedPreferences.Editor editor = getSharedPreferences(PREF_NAME, MODE_PRIVATE).edit();
+                            editor.putString(KEY_USER_NAME, name);
+                            editor.putBoolean(KEY_KEEP_LOGGED_IN, cbKeepLoggedIn.isChecked());
+                            editor.apply();
 
-                        SharedPreferences.Editor editor = prefs.edit();
-                        editor.putString(KEY_USER_NAME, name);
-                        editor.putBoolean(KEY_KEEP_LOGGED_IN, cbKeepLoggedIn.isChecked());
-                        if (isFirstLogin) {
-                            editor.putBoolean(KEY_USER_NAME + "_" + name + "_body_setting", true);
-                        }
-                        editor.apply();
-
-                        runOnUiThread(() -> {
-                            Toast.makeText(LoginActivity.this,
-                                    "로그인 성공", Toast.LENGTH_SHORT).show();
-
-                            Intent intent;
-                            if (isFirstLogin) {
-                                // 첫 로그인 시 Body_Setting 화면으로 이동
-                                intent = new Intent(LoginActivity.this, Body_Setting.class);
-                            } else {
-                                // 이후 로그인 시 MainActivity로 이동
-                                intent = new Intent(LoginActivity.this, MainActivity.class);
-                            }
+                            // ExerciseFragment로 이동
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("fragment", "exercise");  // ExerciseFragment로 이동하기 위한 플래그
                             startActivity(intent);
                             finish();
-                        });
-                    } else {
-                        runOnUiThread(() -> {
+                        } else {
                             Toast.makeText(LoginActivity.this,
                                     "로그인 실패: 잘못된 이름 또는 비밀번호", Toast.LENGTH_SHORT).show();
-                        });
-                    }
+                        }
+                    });
                 }
             });
         } catch (Exception e) {

@@ -45,25 +45,18 @@ public class ExerciseFragment extends Fragment {
                     new ExerciseInfo("목 앞 근육 스트레칭", "one_one.mp4"),
                     new ExerciseInfo("목 좌우 근육 스트레칭", "one_two.mp4")
             ));
-            put(2, Arrays.asList(
-                    new ExerciseInfo("목 근력 운동", "two_fifteen.mp4"),
-                    new ExerciseInfo("목 스트레칭", "two_sixteen.mp4")
-            ));
-            put(3, Arrays.asList(
-                    new ExerciseInfo("목 회전 운동", "three_six.mp4")
-            ));
         }});
         put("어깨", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
+                    new ExerciseInfo("날개뼈 움직이기", "one_eight.mp4"),
                     new ExerciseInfo("어깨 들어올리기", "one_nine.mp4"),
-                    new ExerciseInfo("어깨 스트레칭", "one_thirteen.mp4")
+                    new ExerciseInfo("날개뼈 모으기", "one_ten.mp4"),
+                    new ExerciseInfo("몸통 앞쪽 근육 스트레칭", "one_three.mp4")
             ));
             put(2, Arrays.asList(
-                    new ExerciseInfo("어깨 운동 1단계", "two_thirteen.mp4"),
-                    new ExerciseInfo("어깨 운동 2단계", "two_fourteen.mp4")
-            ));
-            put(3, Arrays.asList(
-                    new ExerciseInfo("어깨 회전 운동", "three_seven.mp4")
+                    new ExerciseInfo("어깨 운동 2단계", "two_fourteen.mp4"),
+                    new ExerciseInfo("어깨 스트레칭", "two_ten.mp4"),
+                    new ExerciseInfo("어깨 운동 1단계", "two_thirteen.mp4")
             ));
         }});
         put("팔", new HashMap<Integer, List<ExerciseInfo>>() {{
@@ -71,24 +64,15 @@ public class ExerciseFragment extends Fragment {
                     new ExerciseInfo("손목 및 팔꿈치 주변 근육 스트레칭", "one_eleven.mp4")
             ));
             put(2, Arrays.asList(
-                    new ExerciseInfo("팔 근력 운동", "two_nine.mp4"),
-                    new ExerciseInfo("팔 스트레칭", "two_seventeen.mp4")
-            ));
-            put(3, Arrays.asList(
-                    new ExerciseInfo("팔 회전 운동", "three_eight.mp4")
+                    new ExerciseInfo("팔 근력 운동", "two_nine.mp4")
             ));
         }});
         put("등", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
-                    new ExerciseInfo("날개뼈 움직이기", "one_eight.mp4"),
-                    new ExerciseInfo("날개뼈 모으기", "one_ten.mp4")
-            ));
-            put(2, Arrays.asList(
-                    new ExerciseInfo("등 근력 운동", "two_ten.mp4"),
-                    new ExerciseInfo("등 스트레칭", "two_eighteen.mp4")
-            ));
-            put(3, Arrays.asList(
-                    new ExerciseInfo("등 회전 운동", "three_nine.mp4")
+                    new ExerciseInfo("몸통회전 근육 스트레칭", "one_five.mp4"),
+                    new ExerciseInfo("몸통 옆쪽 근육 스트레칭", "one_four.mp4"),
+                    new ExerciseInfo("몸통 스트레칭 2단계", "one_seven.mp4"),
+                    new ExerciseInfo("몸통 스트레칭 1단계", "one_six.mp4")
             ));
         }});
         put("다리", new HashMap<Integer, List<ExerciseInfo>>() {{
@@ -96,42 +80,29 @@ public class ExerciseFragment extends Fragment {
                     new ExerciseInfo("허벅지 및 종아리 근육 스트레칭", "one_twelve.mp4")
             ));
             put(2, Arrays.asList(
-                    new ExerciseInfo("런지", "two_six.mp4"),
-                    new ExerciseInfo("좌우런지", "two_seven.mp4"),
                     new ExerciseInfo("발전된 런지", "two_eight.mp4"),
                     new ExerciseInfo("앉았다 일어서기", "two_eleven.mp4"),
-                    new ExerciseInfo("발전된 앉았다 일어서기", "two_twelve.mp4")
+                    new ExerciseInfo("무릎 펴기", "two_five.mp4"),
+                    new ExerciseInfo("무릎 벌리기", "two_four.mp4"),
+                    new ExerciseInfo("엉덩이 들기", "two_one.mp4"),
+                    new ExerciseInfo("좌우런지", "two_seven.mp4"),
+                    new ExerciseInfo("런지", "two_six.mp4"),
+                    new ExerciseInfo("엉덩이 옆 근육 운동", "two_three.mp4"),
+                    new ExerciseInfo("발전된 앉았다 일어서기", "two_twelve.mp4"),
+                    new ExerciseInfo("엎드려 누운 상태로 다리 들기", "two_two.mp4")
             ));
             put(3, Arrays.asList(
                     new ExerciseInfo("움직이는 런지", "three_five.mp4"),
-                    new ExerciseInfo("다리 회전 운동", "three_ten.mp4")
+                    new ExerciseInfo("앉은 상태에서 제자리 걷기", "three_four.mp4"),
+                    new ExerciseInfo("한발 서기", "three_one.mp4"),
+                    new ExerciseInfo("버드독 2단계", "three_three.mp4"),
+                    new ExerciseInfo("버드독 1단계", "three_two.mp4")
             ));
         }});
     }};
 
-    // 전신 운동 매핑
-    private final Map<Integer, List<ExerciseInfo>> fullBodyExercises = new HashMap<Integer, List<ExerciseInfo>>() {{
-        put(1, Arrays.asList(
-                new ExerciseInfo("몸통 앞쪽 근육 스트레칭", "one_three.mp4"),
-                new ExerciseInfo("몸통 옆쪽 근육 스트레칭", "one_four.mp4"),
-                new ExerciseInfo("몸통회전 근육 스트레칭", "one_five.mp4"),
-                new ExerciseInfo("몸통 스트레칭 1단계", "one_six.mp4"),
-                new ExerciseInfo("몸통 스트레칭 2단계", "one_seven.mp4")
-        ));
-        put(2, Arrays.asList(
-                new ExerciseInfo("엉덩이 들기", "two_one.mp4"),
-                new ExerciseInfo("엎드려 누운 상태로 다리 들기", "two_two.mp4"),
-                new ExerciseInfo("엉덩이 옆 근육 운동", "two_three.mp4"),
-                new ExerciseInfo("무릎 벌리기", "two_four.mp4"),
-                new ExerciseInfo("무릎 펴기", "two_five.mp4")
-        ));
-        put(3, Arrays.asList(
-                new ExerciseInfo("한발 서기", "three_one.mp4"),
-                new ExerciseInfo("버드독 1단계", "three_two.mp4"),
-                new ExerciseInfo("버드독 2단계", "three_three.mp4"),
-                new ExerciseInfo("앉은 상태에서 제자리 걷기", "three_four.mp4")
-        ));
-    }};
+    // 전신 운동 매핑 - 전신 선택 시 모든 운동이 표시되도록 비워둡니다
+    private final Map<Integer, List<ExerciseInfo>> fullBodyExercises = new HashMap<>();
 
     @Nullable
     @Override
@@ -150,7 +121,10 @@ public class ExerciseFragment extends Fragment {
             // 선택된 부위들 가져오기
             if (getArguments() != null && getArguments().containsKey("orderedParts")) {
                 selectedParts = getArguments().getStringArrayList("orderedParts");
-            } else {
+            }
+
+            // 선택된 부위가 없는 경우 SharedPreferences에서 가져오기
+            if (selectedParts == null || selectedParts.isEmpty()) {
                 SharedPreferences prefs = requireContext().getSharedPreferences("LoginPrefs", 0);
                 String selectedPartsJson = prefs.getString("selected_parts", "[]");
                 Gson gson = new Gson();
@@ -229,10 +203,12 @@ public class ExerciseFragment extends Fragment {
 
                 // 1. 선택된 부위의 운동을 해당 단계에 우선 배치
                 if (selectedParts != null && !selectedParts.isEmpty()) {
-                    // 전신이 선택된 경우
+                    // 전신이 선택된 경우 모든 운동을 순서대로 표시
                     if (selectedParts.contains("전신")) {
-                        if (fullBodyExercises.containsKey(stage)) {
-                            stageExercises.addAll(fullBodyExercises.get(stage));
+                        for (Map<Integer, List<ExerciseInfo>> partStageExercises : partExercises.values()) {
+                            if (partStageExercises.containsKey(stage)) {
+                                stageExercises.addAll(partStageExercises.get(stage));
+                            }
                         }
                     } else {
                         // 선택된 부위의 운동을 우선 배치
@@ -253,11 +229,6 @@ public class ExerciseFragment extends Fragment {
                             }
                         }
 
-                        // 전신 운동을 별도 리스트에 추가
-                        if (fullBodyExercises.containsKey(stage)) {
-                            otherExercises.addAll(fullBodyExercises.get(stage));
-                        }
-
                         // 선택되지 않은 운동들을 마지막에 추가
                         stageExercises.addAll(otherExercises);
                     }
@@ -267,9 +238,6 @@ public class ExerciseFragment extends Fragment {
                         if (partStageExercises.containsKey(stage)) {
                             stageExercises.addAll(partStageExercises.get(stage));
                         }
-                    }
-                    if (fullBodyExercises.containsKey(stage)) {
-                        stageExercises.addAll(fullBodyExercises.get(stage));
                     }
                 }
 

@@ -35,6 +35,11 @@
           <theme>@style/Theme.My</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_motivation.xml">
+        <config>
+          <theme>@style/Theme.My</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
         <config>
           <theme>@style/Theme.My</theme>
@@ -106,7 +111,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5f0a800a-6a29-4e71-b10b-2d93c85223a5" name="Changes" comment="" />
+    <list default="true" id="5f0a800a-6a29-4e71-b10b-2d93c85223a5" name="Changes" comment="fix fragment_custom" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -115,7 +120,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\jkh04\.android\avd\Medium_Phone.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=R3CR10JVA6V)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -148,12 +153,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Jinnuu/opensource-3-1.git",
-    "accountId": "ccab289a-2373-41a4-a236-934a402ef451"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;dhfqoal&quot;
   }
-}]]></component>
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Jinnuu/opensource-3-1.git&quot;,
+    &quot;accountId&quot;: &quot;ccab289a-2373-41a4-a236-934a402ef451&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -173,9 +187,9 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "jkh2",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/opensource-3-1-main/opensource-3-1-main/my",
+    "last_opened_file_path": "C:/opensource-3-1/my",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.2",
@@ -187,6 +201,11 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\wlsdn\AndroidStudioProjects\new\my\app\src\main\res\raw" />
       <recent name="C:\Users\wlsdn\AndroidStudioProjects\new\my\app\src\main\res\drawable" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\opensource-3-1-main\opensource-3-1-main\my\app\src\main\res\drawable" />
+      <recent name="C:\opensource-3-1-main\opensource-3-1-main\my\app\src\main\res\layout" />
+      <recent name="C:\opensource-3-1-main\opensource-3-1-main\my\app\src\main\java\com\example\my" />
     </key>
   </component>
   <component name="RunManager">
@@ -272,19 +291,32 @@
       <option name="presentableId" value="Default" />
       <updated>1746044926508</updated>
     </task>
+    <task id="LOCAL-00001" summary="fix fragment_custom">
+      <option name="closed" value="true" />
+      <created>1749189285161</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1749189285161</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix fragment_custom" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix fragment_custom" />
   </component>
   <component name="play_dynamic_filters_status">
     <option name="appIdToCheckInfo">
       <map>
         <entry key="com.example.my">
           <value>
-            <CheckInfo lastCheckTimestamp="1749052805616" />
+            <CheckInfo lastCheckTimestamp="1749184050268" />
           </value>
         </entry>
         <entry key="com.example.my.test">
           <value>
-            <CheckInfo lastCheckTimestamp="1749052805618" />
+            <CheckInfo lastCheckTimestamp="1749184050268" />
           </value>
         </entry>
       </map>

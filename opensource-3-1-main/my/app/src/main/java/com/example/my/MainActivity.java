@@ -1,10 +1,14 @@
 package com.example.my;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import java.util.List;
 
 // 메인 화면
 
@@ -69,13 +73,21 @@ public class MainActivity extends AppCompatActivity {
         ExerciseFragment fragment = new ExerciseFragment();
         Bundle args = new Bundle();
 
-        // Body_Setting에서 전달받은 데이터가 있다면 ExerciseFragment로 전달
+        // Body_Setting에서 전달받은 데이터 처리
         ArrayList<String> orderedParts = getIntent().getStringArrayListExtra("orderedParts");
         if (orderedParts != null) {
             args.putStringArrayList("orderedParts", orderedParts);
+            fragment.setArguments(args);
+        } else {
+            // SharedPreferences에서 저장된 부위 정보 가져오기
+            SharedPreferences prefs = getSharedPreferences("LoginPrefs", MODE_PRIVATE);
+            String selectedPartsJson = prefs.getString("selected_parts", "[]");
+            Gson gson = new Gson();
+            List<String> selectedParts = gson.fromJson(selectedPartsJson, new TypeToken<List<String>>(){}.getType());
+            args.putStringArrayList("orderedParts", new ArrayList<>(selectedParts));
+            fragment.setArguments(args);
         }
 
-        fragment.setArguments(args);
         return fragment;
     }
 
