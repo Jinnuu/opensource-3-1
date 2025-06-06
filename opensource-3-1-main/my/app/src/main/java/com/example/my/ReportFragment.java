@@ -284,7 +284,10 @@ public class ReportFragment extends Fragment {
     private void addHeaderCell(TableRow row, String text) {
         TextView textView = new TextView(getContext());
         textView.setText(text);
-        textView.setPadding(10, 10, 10, 10);
+        textView.setPadding(10, 20, 10, 20);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setTextSize(14);
         textView.setTypeface(null, android.graphics.Typeface.BOLD);
         row.addView(textView);
     }
@@ -292,7 +295,10 @@ public class ReportFragment extends Fragment {
     private void addCell(TableRow row, String text) {
         TextView textView = new TextView(getContext());
         textView.setText(text);
-        textView.setPadding(10, 10, 10, 10);
+        textView.setPadding(10, 20, 10, 20);
+        textView.setTextColor(Color.BLACK);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setTextSize(14);
         row.addView(textView);
     }
 } 

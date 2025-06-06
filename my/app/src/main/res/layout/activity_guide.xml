@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_forest_green_gradient">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="36dp"
+        android:gravity="center_horizontal">
+
+        <!-- 타이틀 -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="재활 운동 가이드"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="#2E6F40"
+            android:fontFamily="sans-serif-black"
+            android:shadowColor="#B3FFFFFF"
+            android:shadowDx="0"
+            android:shadowDy="3"
+            android:shadowRadius="12"
+            android:layout_marginBottom="48dp"/>
+
+        <!-- 카드: 재활 부위 선택 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="14dp"
+            app:strokeColor="#2E6F40"
+            app:strokeWidth="3dp"
+            app:cardBackgroundColor="#E6F4EA">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="36dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="재활 부위 선택"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#2E6F40"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="14dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/bodyguide"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/image_rounded_bg"
+                    android:contentDescription="재활 부위 안내 이미지"
+                    android:layout_marginBottom="28dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• 목, 어깨, 팔, 등, 다리 등 재활이 필요한 부위를 선택하세요.\n• 각 부위별 맞춤 운동을 추천합니다.\n• 전신 운동도 선택할 수 있습니다."
+                    android:textSize="22sp"
+                    android:textColor="#465945"
+                    android:lineSpacingExtra="12dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 카드: 운동 선택 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="14dp"
+            app:strokeColor="#2E8B57"
+            app:strokeWidth="3dp"
+            app:cardBackgroundColor="#F0F8F4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="36dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="운동 선택"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#2E8B57"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="14dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/exerciseset"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/image_rounded_bg"
+                    android:contentDescription="운동 선택 이미지"
+                    android:layout_marginBottom="28dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• 부위별 다양한 운동을 확인하세요.\n• 자세한 설명과 동영상도 제공합니다.\n• 난이도별로 쉽게 선택할 수 있습니다."
+                    android:textSize="22sp"
+                    android:textColor="#465945"
+                    android:lineSpacingExtra="12dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 카드: 나만의 루틴 만들기 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="14dp"
+            app:strokeColor="#98A869"
+            app:strokeWidth="3dp"
+            app:cardBackgroundColor="#F5FAF6">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="36dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나만의 루틴 만들기"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="#98A869"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="14dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/custom"
+                    android:scaleType="fitCenter"
+                    android:contentDescription="나만의 루틴 이미지"
+                    android:layout_marginBottom="28dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• 원하는 운동을 조합해 나만의 루틴을 만드세요.\n• 루틴에 이름과 설명을 추가할 수 있습니다.\n• 언제든 수정하고 실행할 수 있습니다."
+                    android:textSize="22sp"
+                    android:textColor="#465945"
+                    android:lineSpacingExtra="12dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 카드: 운동 기록 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="14dp"
+            app:strokeColor="#43A047"
+            app:strokeWidth="3dp"
+            app:cardBackgroundColor="#EAF7EC">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="36dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="운동 기록"
+                    android:textSize="30sp"
+                    android:textStyle="bold"
+                    android:textColor="#43A047"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="14dp"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="380dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/report"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/image_rounded_bg"
+                    android:contentDescription="운동 기록 이미지"
+                    android:layout_marginBottom="28dp"/>
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• 일별 운동 시간과 완료한 운동을 한눈에!\n• 날짜별 상세 기록을 그래프로 확인하세요.\n• 운동 진행 상황을 쉽게 파악할 수 있습니다."
+                    android:textSize="22sp"
+                    android:textColor="#465945"
+                    android:lineSpacingExtra="12dp"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <Button
+            android:id="@+id/btn_Start"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="다음"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2E8B57"
+            android:fontFamily="sans-serif-medium"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="12dp"
+            android:elevation="6dp"
+            app:cornerRadius="30dp"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -43,7 +43,7 @@ public class SettingsFragment extends Fragment {
         // 가이드 보기 버튼
         MaterialButton btnAppGuide = view.findViewById(R.id.btnAppGuide);
         btnAppGuide.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), Guide_Activity.class);
+            Intent intent = new Intent(getActivity(), GuideActivity.class);
             startActivity(intent);
         });
 
