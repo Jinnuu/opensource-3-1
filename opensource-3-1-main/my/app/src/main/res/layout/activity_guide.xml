@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 가이드 화면 레이아웃: 앱 사용법을 소개하는 온보딩 화면 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +9,8 @@
     android:background="@color/background"
     tools:context=".Guide_Activity">
 
-    <!-- 스크롤 가능한 주요 내용 -->
+    <!-- 스크롤 가능한 주요 내용 영역 -->
+    <!-- 사용자가 세로로 스크롤하여 모든 가이드 카드를 볼 수 있도록 함 -->
     <ScrollView
         android:id="@+id/guideScroll"
         android:layout_width="0dp"
@@ -19,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- 스크롤 내부의 컨텐츠를 담는 컨테이너 -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,7 +32,8 @@
             android:paddingBottom="32dp"
             android:gravity="center_horizontal">
 
-            <!-- 카드 1: 커스텀 워크아웃 루틴 -->
+            <!-- 첫 번째 기능 소개 카드: 커스텀 워크아웃 루틴 -->
+            <!-- 사용자가 자신만의 운동 루틴을 만들 수 있다는 것을 설명 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +45,7 @@
                 android:elevation="6dp"
                 android:gravity="top|center_horizontal">
 
-                <!-- 텍스트를 맨 위로 -->
+                <!-- 기능 설명 텍스트 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,7 +57,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="24dp"/>
 
-                <!-- 이미지 크기 조정 (더 크게) -->
+                <!-- 기능을 시각적으로 표현하는 아이콘 이미지 -->
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
@@ -62,7 +66,8 @@
                     android:scaleType="fitCenter"/>
             </LinearLayout>
 
-            <!-- 카드 2: 다양한 운동 데이터베이스 -->
+            <!-- 두 번째 기능 소개 카드: 운동 데이터베이스 -->
+            <!-- 다양한 운동 정보에 접근할 수 있다는 것을 설명 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,6 +79,7 @@
                 android:elevation="6dp"
                 android:gravity="top|center_horizontal">
 
+                <!-- 기능 설명 텍스트 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,6 +91,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="24dp"/>
 
+                <!-- 기능을 시각적으로 표현하는 아이콘 이미지 -->
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
@@ -93,7 +100,8 @@
                     android:scaleType="fitCenter"/>
             </LinearLayout>
 
-            <!-- 카드 3: 리포트(진척도 트래킹) -->
+            <!-- 세 번째 기능 소개 카드: 진척도 트래킹 리포트 -->
+            <!-- 운동 진행 상황을 차트로 확인할 수 있다는 것을 설명 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -104,6 +112,7 @@
                 android:elevation="6dp"
                 android:gravity="top|center_horizontal">
 
+                <!-- 기능 설명 텍스트 -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -115,6 +124,7 @@
                     android:gravity="center"
                     android:layout_marginBottom="24dp"/>
 
+                <!-- 기능을 시각적으로 표현하는 아이콘 이미지 -->
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
@@ -126,7 +136,8 @@
         </LinearLayout>
     </ScrollView>
 
-    <!-- 하단 고정: 시작하기 버튼 -->
+    <!-- 하단 고정 버튼: 앱 사용 시작 -->
+    <!-- 사용자가 가이드를 모두 읽고 앱을 시작할 수 있는 버튼 -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_start"
         android:layout_width="0dp"

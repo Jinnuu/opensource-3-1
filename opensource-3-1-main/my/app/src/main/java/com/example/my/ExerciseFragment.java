@@ -24,28 +24,50 @@ import java.util.concurrent.TimeUnit;
 import java.util.Map;
 import com.example.my.databinding.FragmentExerciseBinding;
 
-// 운동 프래그먼트 (운동 목록 화면)
-
+/**
+ * 운동 프래그먼트 클래스
+ * 앱의 메인 화면으로, 사용자가 선택한 운동 부위별로 운동 목록을 제공
+ * 각 운동은 단계별로 구분되어 있으며, 운동 가이드 화면으로 이동 가능
+ * 사용자의 회원가입 후 경과일수도 함께 표시
+ */
 public class ExerciseFragment extends Fragment {
+    // 뷰 바인딩 객체 - XML 레이아웃과 Java 코드를 연결
     private FragmentExerciseBinding binding;
+    
+    // UI 컴포넌트들
     private TextView tvMessage;
     private TextView tvDayCount;
+    
+    // 운동 부위별 카드뷰들 - 각 부위를 클릭하면 해당 운동 목록으로 이동
     private CardView cardWristExercise, cardBackExercise, cardNeckExercise, cardCustomExercise,
             cardShoulderExercise, cardArmExercise, cardChestExercise, cardAbsExercise,
             cardHipExercise, cardLegExercise;
+    
+    // SharedPreferences 관련 상수
     public static final String PREF_NAME = "ExercisePrefs";
     private static final String KEY_INSTALL_DATE = "install_date";
+    
+    // 현재 로그인한 사용자 정보
     private String currentUserName;
+    
+    // 사용자가 선택한 운동 부위 목록
     private List<String> selectedParts = new ArrayList<>();
 
-    // 부위별 운동 매핑
+    /**
+     * 부위별 운동 데이터 매핑
+     * 각 운동 부위에 대해 단계별로 운동 정보를 저장
+     * ExerciseInfo 객체는 운동 이름과 비디오 파일명을 포함
+     */
     private final Map<String, Map<Integer, List<ExerciseInfo>>> partExercises = new HashMap<String, Map<Integer, List<ExerciseInfo>>>() {{
+        // 목 운동 - 1단계만 제공
         put("목", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
                     new ExerciseInfo("목 앞 근육 스트레칭", "one_one.mp4"),
                     new ExerciseInfo("목 좌우 근육 스트레칭", "one_two.mp4")
             ));
         }});
+        
+        // 어깨 운동 - 1단계, 2단계 제공
         put("어깨", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
                     new ExerciseInfo("날개뼈 움직이기", "one_eight.mp4"),
@@ -59,6 +81,8 @@ public class ExerciseFragment extends Fragment {
                     new ExerciseInfo("어깨 운동 1단계", "two_thirteen.mp4")
             ));
         }});
+        
+        // 팔 운동 - 1단계, 2단계 제공
         put("팔", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
                     new ExerciseInfo("손목 및 팔꿈치 주변 근육 스트레칭", "one_eleven.mp4")
@@ -67,6 +91,8 @@ public class ExerciseFragment extends Fragment {
                     new ExerciseInfo("팔 근력 운동", "two_nine.mp4")
             ));
         }});
+        
+        // 등 운동 - 1단계만 제공
         put("등", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
                     new ExerciseInfo("몸통회전 근육 스트레칭", "one_five.mp4"),
@@ -75,6 +101,8 @@ public class ExerciseFragment extends Fragment {
                     new ExerciseInfo("몸통 스트레칭 1단계", "one_six.mp4")
             ));
         }});
+        
+        // 다리 운동 - 1단계, 2단계, 3단계 제공 (가장 많은 운동 포함)
         put("다리", new HashMap<Integer, List<ExerciseInfo>>() {{
             put(1, Arrays.asList(
                     new ExerciseInfo("허벅지 및 종아리 근육 스트레칭", "one_twelve.mp4")
@@ -107,6 +135,7 @@ public class ExerciseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // 뷰 바인딩을 통한 레이아웃 초기화
         binding = FragmentExerciseBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
@@ -114,16 +143,16 @@ public class ExerciseFragment extends Fragment {
             // 현재 로그인한 사용자 이름 가져오기
             currentUserName = getArguments() != null ? getArguments().getString("userName") : null;
 
-            // View 초기화
+            // UI 컴포넌트 초기화
             tvMessage = binding.tvMessage;
             tvDayCount = binding.tvDayCount;
 
-            // 선택된 부위들 가져오기
+            // 선택된 운동 부위 정보 가져오기 (MainActivity에서 전달받은 데이터)
             if (getArguments() != null && getArguments().containsKey("orderedParts")) {
                 selectedParts = getArguments().getStringArrayList("orderedParts");
             }
 
-            // 선택된 부위가 없는 경우 SharedPreferences에서 가져오기
+            // 선택된 부위가 없는 경우 SharedPreferences에서 기존 설정 가져오기
             if (selectedParts == null || selectedParts.isEmpty()) {
                 SharedPreferences prefs = requireContext().getSharedPreferences("LoginPrefs", 0);
                 String selectedPartsJson = prefs.getString("selected_parts", "[]");
@@ -131,15 +160,15 @@ public class ExerciseFragment extends Fragment {
                 selectedParts = gson.fromJson(selectedPartsJson, new TypeToken<List<String>>(){}.getType());
             }
 
-            // 회원가입 후 경과일수 가져오기
+            // 회원가입 후 경과일수 계산 및 표시
             if (currentUserName != null) {
                 fetchRegistrationDate();
             }
 
-            // 운동 버튼 클릭 리스너 설정
+            // 운동 카드 클릭 이벤트 설정
             setupClickListeners();
 
-            // 운동 일수 표시
+            // 운동 일수 업데이트
             updateExerciseDayCount();
 
         } catch (Exception e) {
@@ -155,6 +184,7 @@ public class ExerciseFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        // 메모리 누수 방지를 위해 바인딩 객체 해제
         binding = null;
     }
 

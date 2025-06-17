@@ -22,17 +22,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// 사용자 정의 운동 루틴 화면
-
+/**
+ * 사용자 정의 운동 루틴 프래그먼트 클래스
+ * 사용자가 자신만의 운동 루틴을 만들고 관리할 수 있는 화면
+ * 부위별 운동 선택, 루틴 이름/설명 입력, 서버 저장 기능 제공
+ * Chip UI를 활용한 직관적인 운동 선택 인터페이스 구현
+ */
 public class CustomFragment extends Fragment {
+    // UI 컴포넌트들
     private EditText etRoutineName, etRoutineDescription;
     private ChipGroup chipGroupParts, chipGroupExercises;
     private Button btnSaveRoutine, btnViewSavedRoutines;
     private TextView tvExerciseDescription;
+    
+    // 네트워크 통신을 위한 객체들
     private final OkHttpClient client = new OkHttpClient();
     private final Gson gson = new Gson();
+    
+    // SharedPreferences 관련 상수
     private static final String PREF_NAME = "LoginPrefs";
     private static final String KEY_USER_NAME = "user_name";
+    
+    // 운동 데이터 저장소
     private final Map<String, String> exerciseDescriptions = new HashMap<>();
     private final Map<String, List<String>> exercisesByPart = new HashMap<>();
 
@@ -41,7 +52,7 @@ public class CustomFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_custom, container, false);
 
-        // View 초기화
+        // UI 컴포넌트 초기화
         etRoutineName = view.findViewById(R.id.etRoutineName);
         etRoutineDescription = view.findViewById(R.id.etRoutineDescription);
         chipGroupParts = view.findViewById(R.id.chipGroupParts);
@@ -50,18 +61,17 @@ public class CustomFragment extends Fragment {
         btnViewSavedRoutines = view.findViewById(R.id.btnViewSavedRoutines);
         tvExerciseDescription = view.findViewById(R.id.tvExerciseDescription);
 
-        // 운동 설명 초기화
+        // 운동 데이터 초기화
         initializeExerciseDescriptions();
-        // 부위별 운동 초기화
         initializeExercisesByPart();
 
-        // 부위 선택 칩 추가
+        // 부위 선택 칩 UI 생성
         addPartChips();
 
-        // 저장 버튼 클릭 리스너
+        // 저장 버튼 클릭 이벤트 설정
         btnSaveRoutine.setOnClickListener(v -> saveRoutine());
 
-        // 저장된 루틴 보기 버튼 클릭 리스너
+        // 저장된 루틴 보기 버튼 클릭 이벤트 설정
         btnViewSavedRoutines.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), RoutineManagementActivity.class);
             startActivity(intent);
@@ -70,8 +80,13 @@ public class CustomFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 운동 설명 데이터 초기화
+     * 각 운동에 대한 상세 설명을 HashMap에 저장
+     * 사용자가 운동을 선택했을 때 설명을 표시하기 위해 사용
+     */
     private void initializeExerciseDescriptions() {
-        // 1단계 운동
+        // 1단계 운동 (기본 스트레칭 및 가벼운 운동)
         exerciseDescriptions.put("목 앞 근육 스트레칭", "목 앞쪽 근육을 스트레칭하는 운동입니다.");
         exerciseDescriptions.put("목 좌우 근육 스트레칭", "목 좌우 근육을 스트레칭하는 운동입니다.");
         exerciseDescriptions.put("몸통 앞쪽 근육 스트레칭", "몸통 앞쪽 근육을 스트레칭하는 운동입니다.");
@@ -85,7 +100,7 @@ public class CustomFragment extends Fragment {
         exerciseDescriptions.put("손목 및 팔꿈치 주변 근육 스트레칭", "손목과 팔꿈치 주변 근육을 스트레칭하는 운동입니다.");
         exerciseDescriptions.put("허벅지 및 종아리 근육 스트레칭", "하체 근육을 스트레칭하는 운동입니다.");
 
-        // 2단계 운동
+        // 2단계 운동 (근력 강화 운동)
         exerciseDescriptions.put("엉덩이 들기", "엉덩이 근육을 강화하는 운동입니다.");
         exerciseDescriptions.put("엎드려 누운 상태로 다리 들기", "하체 근육을 강화하는 운동입니다.");
         exerciseDescriptions.put("엉덩이 옆 근육 운동", "엉덩이 옆쪽 근육을 강화하는 운동입니다.");
@@ -101,7 +116,7 @@ public class CustomFragment extends Fragment {
         exerciseDescriptions.put("어깨 운동 1단계", "기본적인 어깨 근육 강화 운동입니다.");
         exerciseDescriptions.put("어깨 운동 2단계", "심화된 어깨 근육 강화 운동입니다.");
 
-        // 3단계 운동
+        // 3단계 운동 (고급 운동 및 균형 운동)
         exerciseDescriptions.put("한발 서기", "균형감과 하체 근육을 강화하는 운동입니다.");
         exerciseDescriptions.put("버드독 1단계", "기본적인 코어 근육 강화 운동입니다.");
         exerciseDescriptions.put("버드독 2단계", "심화된 코어 근육 강화 운동입니다.");
@@ -109,14 +124,19 @@ public class CustomFragment extends Fragment {
         exerciseDescriptions.put("움직이는 런지", "동적인 하체 근육 강화 운동입니다.");
     }
 
+    /**
+     * 부위별 운동 분류 초기화
+     * 각 신체 부위에 해당하는 운동들을 분류하여 저장
+     * 사용자가 부위를 선택했을 때 해당 운동들을 표시하기 위해 사용
+     */
     private void initializeExercisesByPart() {
-        // 목 운동
+        // 목 운동 (1단계 위주)
         exercisesByPart.put("목", Arrays.asList(
                 "목 앞 근육 스트레칭",
                 "목 좌우 근육 스트레칭"
         ));
 
-        // 어깨 운동
+        // 어깨 운동 (1단계, 2단계 포함)
         exercisesByPart.put("어깨", Arrays.asList(
                 "날개뼈 움직이기",
                 "어깨 들어올리기",
@@ -125,13 +145,13 @@ public class CustomFragment extends Fragment {
                 "어깨 운동 2단계"
         ));
 
-        // 팔 운동
+        // 팔 운동 (1단계, 2단계 포함)
         exercisesByPart.put("팔", Arrays.asList(
                 "손목 및 팔꿈치 주변 근육 스트레칭",
                 "손목 및 팔꿈치 주변 근육"
         ));
 
-        // 등 운동
+        // 등 운동 (1단계, 2단계 포함)
         exercisesByPart.put("등", Arrays.asList(
                 "몸통회전 근육 스트레칭",
                 "몸통 옆쪽 근육 스트레칭",
@@ -140,7 +160,7 @@ public class CustomFragment extends Fragment {
                 "날개 뼈 모음 근육"
         ));
 
-        // 다리 운동
+        // 다리 운동 (모든 단계 포함, 가장 많은 운동)
         exercisesByPart.put("다리", Arrays.asList(
                 "허벅지 및 종아리 근육 스트레칭",
                 "엉덩이 들기",
@@ -158,7 +178,7 @@ public class CustomFragment extends Fragment {
                 "움직이는 런지"
         ));
 
-        // 전신 운동
+        // 전신 운동 (몸 전체를 사용하는 운동)
         exercisesByPart.put("전신", Arrays.asList(
                 "몸통 앞쪽 근육 스트레칭",
                 "버드독 1단계",
@@ -166,6 +186,10 @@ public class CustomFragment extends Fragment {
         ));
     }
 
+    /**
+     * 부위 선택 칩 UI 생성
+     * 사용자가 운동할 부위를 선택할 수 있는 Chip 컴포넌트들을 동적으로 생성
+     */
     private void addPartChips() {
         String[] parts = {"목", "어깨", "팔", "등", "다리", "전신"};
 
@@ -174,7 +198,7 @@ public class CustomFragment extends Fragment {
             chip.setText(part);
             chip.setCheckable(true);
 
-            // 칩 클릭 리스너 추가
+            // 칩 클릭 시 해당 부위의 운동들을 표시
             chip.setOnClickListener(v -> {
                 updateExerciseChips(part);
             });
@@ -183,6 +207,10 @@ public class CustomFragment extends Fragment {
         }
     }
 
+    /**
+     * 선택된 부위에 따른 운동 칩 업데이트
+     * @param selectedPart 사용자가 선택한 신체 부위
+     */
     private void updateExerciseChips(String selectedPart) {
         chipGroupExercises.removeAllViews(); // 기존 운동 칩 모두 제거
 
@@ -193,7 +221,7 @@ public class CustomFragment extends Fragment {
                 chip.setText(exercise);
                 chip.setCheckable(true);
 
-                // 칩 클릭 리스너 추가
+                // 운동 칩 클릭 시 해당 운동의 설명 표시
                 chip.setOnClickListener(v -> {
                     if (chip.isChecked()) {
                         showExerciseDescription(exercise);

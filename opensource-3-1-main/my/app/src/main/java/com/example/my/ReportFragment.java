@@ -32,12 +32,20 @@ import java.util.Date;
 import java.util.HashMap;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 
-// 운동 기록 프래그먼트
-
+/**
+ * 운동 기록 리포트 프래그먼트 클래스
+ * 사용자의 운동 기록을 시각적으로 분석하고 표시하는 화면
+ * MPAndroidChart 라이브러리를 사용한 막대 그래프와 테이블 형태로 데이터 제공
+ * 운동 시간, 완료율, 루틴 진행 상황 등을 종합적으로 확인 가능
+ */
 public class ReportFragment extends Fragment {
     private static final String TAG = "ReportFragment";
-    private TableLayout tableLayout;
-    private BarChart workoutChart;
+    
+    // UI 컴포넌트들
+    private TableLayout tableLayout;    // 운동 기록을 표시하는 테이블
+    private BarChart workoutChart;      // 운동 시간을 시각화하는 막대 그래프
+    
+    // 네트워크 통신을 위한 객체들
     private final OkHttpClient client = new OkHttpClient();
     private final Gson gson = new Gson();
 
@@ -45,16 +53,22 @@ public class ReportFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_report, container, false);
         
+        // UI 컴포넌트 초기화
         tableLayout = view.findViewById(R.id.tableLayout);
         workoutChart = view.findViewById(R.id.workoutChart);
         
-        // 운동 데이터 로드
+        // 서버에서 운동 데이터 로드
         loadWorkoutData();
         
         return view;
     }
 
+    /**
+     * 서버에서 사용자의 운동 기록 데이터를 로드
+     * 로그인한 사용자의 운동 이력을 가져와서 화면에 표시
+     */
     private void loadWorkoutData() {
+        // SharedPreferences에서 현재 로그인한 사용자 이름 가져오기
         String userName = getActivity().getSharedPreferences("LoginPrefs", 0)
             .getString("user_name", null);
 
@@ -63,6 +77,7 @@ public class ReportFragment extends Fragment {
             return;
         }
 
+        // 서버 API 엔드포인트로 운동 데이터 요청
         String url = Constants.API_WORKOUTS + "?userName=" + userName;
         Log.d(TAG, "Loading workout data from URL: " + url);
 
@@ -72,9 +87,11 @@ public class ReportFragment extends Fragment {
             .get()
             .build();
 
+        // 비동기로 서버에 요청 전송
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                // 네트워크 오류 발생 시 처리
                 Log.e(TAG, "Failed to load workout data", e);
                 if (getActivity() != null) {
                     getActivity().runOnUiThread(() -> {
@@ -96,18 +113,20 @@ public class ReportFragment extends Fragment {
                 getActivity().runOnUiThread(() -> {
                     if (response.isSuccessful()) {
                         try {
-                            // JSON 배열이 비어있는지 확인
+                            // 서버에서 빈 배열이 반환된 경우 처리
                             if (responseBody.trim().equals("[]")) {
                                 Log.d(TAG, "No workout data available");
                                 displayWorkoutData(new ArrayList<>());
                                 return;
                             }
 
+                            // JSON 응답을 WorkoutData 객체 리스트로 파싱
                             Type listType = new TypeToken<List<WorkoutData>>(){}.getType();
                             List<WorkoutData> workouts = gson.fromJson(responseBody, listType);
                             
                             if (workouts != null) {
                                 Log.d(TAG, "Successfully parsed " + workouts.size() + " workout records");
+                                // 파싱된 데이터를 화면에 표시
                                 for (WorkoutData workout : workouts) {
                                     Log.d(TAG, "Workout: " + workout.getExerciseType() + 
                                           ", Duration: " + workout.getDuration() + 
@@ -121,6 +140,7 @@ public class ReportFragment extends Fragment {
                                     Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
+                            // JSON 파싱 오류 처리
                             Log.e(TAG, "Error parsing workout data: " + e.getMessage(), e);
                             Log.e(TAG, "Response body that caused the error: " + responseBody);
                             Toast.makeText(getContext(), 
@@ -128,6 +148,7 @@ public class ReportFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        // 서버 오류 처리
                         Log.e(TAG, "Server error: " + response.code() + " - " + responseBody);
                         Toast.makeText(getContext(), 
                             "서버 오류: " + response.code(), 
@@ -138,14 +159,18 @@ public class ReportFragment extends Fragment {
         });
     }
 
+    /**
+     * 운동 데이터를 테이블과 차트로 표시
+     * @param workouts 표시할 운동 데이터 리스트
+     */
     private void displayWorkoutData(List<WorkoutData> workouts) {
-        // 운동 데이터를 날짜순으로 정렬
+        // 운동 데이터를 날짜순으로 정렬 (최신순)
         Collections.sort(workouts, Comparator.comparing(WorkoutData::getWorkoutDate));
 
-        // 그래프 데이터 설정
+        // 막대 그래프 설정
         setupWorkoutChart(workouts);
 
-        // 테이블 헤더 추가
+        // 테이블 헤더 생성
         TableRow headerRow = new TableRow(getContext());
         addHeaderCell(headerRow, "날짜");
         addHeaderCell(headerRow, "운동 종류");
@@ -156,7 +181,7 @@ public class ReportFragment extends Fragment {
         tableLayout.addView(headerRow);
 
         if (workouts == null || workouts.isEmpty()) {
-            // 데이터가 없을 때 빈 행 추가
+            // 운동 데이터가 없을 때 안내 메시지 표시
             TableRow emptyRow = new TableRow(getContext());
             TextView emptyText = new TextView(getContext());
             emptyText.setText("운동 데이터가 없습니다.");
@@ -164,7 +189,7 @@ public class ReportFragment extends Fragment {
             emptyText.setPadding(10, 20, 10, 20);
             
             TableRow.LayoutParams params = new TableRow.LayoutParams();
-            params.span = 6;
+            params.span = 6; // 6개 컬럼을 모두 차지
             emptyText.setLayoutParams(params);
             
             emptyRow.addView(emptyText);
@@ -172,28 +197,34 @@ public class ReportFragment extends Fragment {
             return;
         }
 
-        // 운동 데이터 행 추가
+        // 각 운동 기록을 테이블 행으로 추가
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         for (WorkoutData workout : workouts) {
             TableRow row = new TableRow(getContext());
             
+            // 날짜 표시
             addCell(row, dateFormat.format(workout.getWorkoutDate()));
+            
+            // 운동 종류 표시
             addCell(row, workout.getExerciseType());
             
+            // 루틴 정보 표시 (루틴명과 진행률)
             String routineInfo = workout.getRoutineName() != null ? 
                 workout.getRoutineName() + " (" + workout.getExerciseNumber() + "/" + workout.getTotalExercises() + ")" :
                 "-";
             addCell(row, routineInfo);
             
+            // 운동 번호 표시
             addCell(row, workout.getRoutineName() != null ? 
                 workout.getExerciseNumber() + "/" + workout.getTotalExercises() : "-");
             
-            // 운동 시간을 밀리초에서 분:초 형식으로 변환
+            // 운동 시간을 밀리초에서 분:초 형식으로 변환하여 표시
             double totalMilliseconds = workout.getDuration();
             int minutes = (int) (totalMilliseconds / 60000);
             int seconds = (int) ((totalMilliseconds % 60000) / 1000);
             addCell(row, String.format("%02d:%02d", minutes, seconds));
             
+            // 완료 여부 표시
             addCell(row, workout.isCompleted() ? "완료" : "중단");
             
             tableLayout.addView(row);
