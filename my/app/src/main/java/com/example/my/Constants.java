@@ -4,7 +4,7 @@ package com.example.my;
 
 public class Constants {
     // WiFi IP 주소 사용
-    public static final String BASE_URL = "http://172.30.78.238:8080";
+    public static final String BASE_URL = "http://172.30.64.29:8080";
     public static final String API_USERS = BASE_URL + "/api/users";
     public static final String API_LOGIN = BASE_URL + "/api/login";
     public static final String API_REGISTER = BASE_URL + "/api/register";
