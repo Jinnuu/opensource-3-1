@@ -117,19 +117,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5f0a800a-6a29-4e71-b10b-2d93c85223a5" name="Changes" comment="integrate">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.11.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/CustomFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/CustomFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/ExerciseFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/ExerciseFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/GuideActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/GuideActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/my/Body_Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/my/Body_Setting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/my/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/my/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/my/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/my/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/Body_Setting.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/Body_Setting.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/ReportFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/ReportFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/SettingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/SettingsFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/Workout.java" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/java/com/example/my/Workout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/res/layout/activity_guide.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../opensource-3-1-main/my/app/src/main/res/layout/activity_guide.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +139,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\jkh04\.android\avd\Medium_Phone.avd)]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=PhysicalDevice, isTemplate=false, identifier=serial=R3CR10JVA6V)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />

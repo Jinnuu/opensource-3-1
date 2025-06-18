@@ -84,10 +84,11 @@ public class Body_Setting extends AppCompatActivity {
                     .putBoolean(PREF_NAME + "_" + userName + "_body_setting", true)
                     .apply();
 
-            // 2. MainActivity로 이동하면서 데이터 전달
+            // 2. MainActivity로 이동하면서 데이터 전달 (exercise 프래그먼트로 설정)
             Intent intent = new Intent(Body_Setting.this, MainActivity.class);
             intent.putStringArrayListExtra("orderedParts", new ArrayList<>(selectedParts));
             intent.putExtra("userName", userName);
+            intent.putExtra("fragment", "exercise");  // ExerciseFragment로 이동하기 위한 플래그
             startActivity(intent);
             finish(); // Body_Setting 화면 종료
         });
