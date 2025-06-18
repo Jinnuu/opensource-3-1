@@ -96,9 +96,14 @@ public class RoutineManagementActivity extends AppCompatActivity {
             return;
         }
 
-        // 루틴 삭제 요청
+        // HttpUrl로 쿼리 파라미터 추가
+        HttpUrl url = HttpUrl.parse(Constants.API_ROUTINES + "/" + routine.getId())
+            .newBuilder()
+            .addQueryParameter("userName", userName)
+            .build();
+
         Request request = new Request.Builder()
-            .url(Constants.API_ROUTINES + "/" + routine.getId())
+            .url(url)
             .delete()
             .build();
 
