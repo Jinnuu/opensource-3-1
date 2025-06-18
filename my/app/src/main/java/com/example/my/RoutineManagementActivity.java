@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
+import okhttp3.HttpUrl;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -18,18 +19,18 @@ import java.util.List;
 // 운동 루틴 관리 화면
 
 public class RoutineManagementActivity extends AppCompatActivity {
-    private RecyclerView recyclerViewRoutines;
-    private RoutineAdapter adapter;
-    private final OkHttpClient client = new OkHttpClient();
-    private final Gson gson = new Gson();
+    private RecyclerView recyclerViewRoutines; // 루틴 목록을 보여주는 RecyclerView
+    private RoutineAdapter adapter; // 루틴 목록을 위한 어댑터
+    private final OkHttpClient client = new OkHttpClient(); // HTTP 통신 클라이언트
+    private final Gson gson = new Gson(); // JSON 파싱을 위한 Gson 객체
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_routine_management);
 
-        recyclerViewRoutines = findViewById(R.id.recyclerViewRoutines);
-        Button btnAddRoutine = findViewById(R.id.btnAddRoutine);
+        recyclerViewRoutines = findViewById(R.id.recyclerViewRoutines); // RecyclerView 초기화
+        Button btnAddRoutine = findViewById(R.id.btnAddRoutine); // 새 루틴 추가 버튼
 
         // RecyclerView 설정
         adapter = new RoutineAdapter(new ArrayList<>(), this::deleteRoutine, true);
@@ -48,6 +49,7 @@ public class RoutineManagementActivity extends AppCompatActivity {
         loadRoutines();
     }
 
+    // 저장된 루틴 목록을 서버에서 불러오는 메서드
     private void loadRoutines() {
         String userName = getSharedPreferences("LoginPrefs", 0)
             .getString("user_name", null);
@@ -87,6 +89,7 @@ public class RoutineManagementActivity extends AppCompatActivity {
         });
     }
 
+    // 루틴을 삭제하는 메서드
     private void deleteRoutine(ExerciseRoutine routine) {
         String userName = getSharedPreferences("LoginPrefs", 0)
             .getString("user_name", null);
@@ -96,7 +99,7 @@ public class RoutineManagementActivity extends AppCompatActivity {
             return;
         }
 
-        // HttpUrl로 쿼리 파라미터 추가
+        // HttpUrl로 쿼리 파라미터 추가 (userName을 안전하게 전달)
         HttpUrl url = HttpUrl.parse(Constants.API_ROUTINES + "/" + routine.getId())
             .newBuilder()
             .addQueryParameter("userName", userName)
